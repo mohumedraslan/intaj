@@ -4,6 +4,8 @@ import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import OpenAI from 'openai'
 import Stripe from 'stripe'
+import { type Message } from '@/lib/types'
+import { redirect } from 'next/navigation'
 
 // --- REAL CREATE-CHATBOT IMPLEMENTATION ---
 export async function createChatbot(values: {
@@ -48,7 +50,7 @@ const stripe = new Stripe(process.env.STRIPE_API_KEY as string)
 export async function getAiResponse(values: {
   chatbotId: string;
   prompt: string | null;
-  history: any[];
+  history: Message[];
 }) {
   const { chatbotId, prompt, history } = values
 
@@ -57,7 +59,22 @@ export async function getAiResponse(values: {
   }
 
   const supabase = await createClient()
-  const lastUserMessage = history[history.length - 1]?.content || ''
+  const { data: { user } } = await supabase.auth.getUser()
+  
+  if (!user) {
+    // This should ideally not happen if the page is protected, but as a safeguard:
+    return { response: "Error: Unauthorized user." }
+  }
+
+  const lastUserMessage = history[history.length - 1]
+  
+  // --- NEW: LOG USER MESSAGE ---
+  await supabase.from('messages').insert({
+    chatbot_id: chatbotId,
+    user_id: user.id,
+    role: 'user',
+    content: lastUserMessage.content,
+  })
 
   // --- RETRIEVAL STEP ---
   // 1. Search for a direct match in the FAQs.
@@ -65,7 +82,7 @@ export async function getAiResponse(values: {
     .from('faqs')
     .select('answer')
     .eq('chatbot_id', chatbotId)
-    .textSearch('question', lastUserMessage, { type: 'websearch', config: 'english' } as any)
+    .textSearch('question', lastUserMessage.content, { type: 'websearch', config: 'english' } as { type: 'websearch'; config: string })
 
   if (matchedFaqs && matchedFaqs.length > 0) {
     // If we find a direct FAQ match, return the first answer.
@@ -80,7 +97,7 @@ export async function getAiResponse(values: {
   const augmentedPrompt = ` ${prompt || 'You are a helpful assistant.'} --- Context from knowledge base: ${context} --- `
   const systemMessage = { role: 'system' as const, content: augmentedPrompt }
 
-  const conversationHistory = history.map((msg: any) => ({
+  const conversationHistory = history.map((msg: Message) => ({
     role: msg.role,
     content: msg.content,
   }))
@@ -94,8 +111,17 @@ export async function getAiResponse(values: {
       max_tokens: 250,
     })
 
-    const aiResponse = (response as any).choices?.[0]?.message?.content ||
+    const aiResponse = response.choices?.[0]?.message?.content ||
       "Sorry, I couldn't generate a response."
+    
+    // --- NEW: LOG AI RESPONSE ---
+    await supabase.from('messages').insert({
+      chatbot_id: chatbotId,
+      user_id: user.id,
+      role: 'assistant',
+      content: aiResponse,
+    })
+    
     return { response: aiResponse }
   } catch (error) {
     console.error('OpenAI API Error:', error)

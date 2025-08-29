@@ -28,7 +28,7 @@ export default async function CreateChatbotPage() {
     );
   }
 
-  const isSubscribed = (user as any).subscription_status === 'active' || (user as any).subscription_status === 'trialing'
+  const isSubscribed = user.subscription_status === 'active' || user.subscription_status === 'trialing'
 
   if (!isSubscribed) {
     return (

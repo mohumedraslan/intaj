@@ -2,35 +2,44 @@
 
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import type { z } from 'zod'
+import { type UserProfile } from '@/lib/types'
 
 // --- REAL GET-SESSION IMPLEMENTATION ---
-export async function getSession() {
+export async function getSession(): Promise<{ user: UserProfile | null }> {
   const supabase = await createClient()
   const {
-    data: { user },
+    data: { user: authUser },
   } = await supabase.auth.getUser()
 
-  if (!user) {
-    return { user: null, profile: null }
+  if (!authUser) {
+    return { user: null }
   }
 
   const { data: profile } = await supabase
     .from('profiles')
     .select('*')
-    .eq('id', user.id)
+    .eq('id', authUser.id)
     .single()
 
-  const userWithProfile = { ...user, ...profile }
-  return { user: userWithProfile }
+  // Combine auth user and profile into our strongly-typed object
+  const user: UserProfile = {
+    id: authUser.id,
+    email: authUser.email,
+    ...profile,
+  }
+  
+  return { user }
 }
 
 export async function login(
   prevState: { message: string } | undefined,
-  formData: z.infer<any>
+  formData: FormData
 ) {
   const supabase = await createClient()
-  const { error } = await supabase.auth.signInWithPassword(formData as any)
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
+  
+  const { error } = await supabase.auth.signInWithPassword({ email, password })
   if (error) {
     return { message: error.message }
   }
@@ -39,10 +48,13 @@ export async function login(
 
 export async function signup(
   prevState: { message: string } | undefined,
-  formData: z.infer<any>
+  formData: FormData
 ) {
   const supabase = await createClient()
-  const { error } = await supabase.auth.signUp(formData as any)
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
+  
+  const { error } = await supabase.auth.signUp({ email, password })
   if (error) {
     return { message: error.message }
   }

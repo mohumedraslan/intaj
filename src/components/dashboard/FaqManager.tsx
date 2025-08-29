@@ -9,8 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
 import { Plus, Trash2 } from 'lucide-react'
 import { addFaq, deleteFaq } from '@/app/(dashboard)/actions'
-
-type Faq = { id: string; question: string; answer: string }
+import { type Faq } from '@/lib/types'
 
 export function FaqManager({ chatbotId, initialFaqs }: { chatbotId: string; initialFaqs: Faq[] }) {
   const [faqs, setFaqs] = useState<Faq[]>(initialFaqs)
@@ -24,11 +23,11 @@ export function FaqManager({ chatbotId, initialFaqs }: { chatbotId: string; init
 
     startTransition(async () => {
       const result = await addFaq({ chatbotId, question, answer })
-      if ((result as any).error) {
-        toast.error('Failed to add FAQ', { description: (result as any).error })
-      } else if ((result as any).newFaq) {
+      if (result?.error) {
+        toast.error('Failed to add FAQ', { description: result.error })
+      } else if (result?.newFaq) {
         toast.success('FAQ added!')
-        setFaqs((prev) => [...prev, (result as any).newFaq as Faq])
+        setFaqs((prev) => [...prev, result.newFaq])
         ;(event.target as HTMLFormElement).reset()
       }
     })
@@ -70,7 +69,7 @@ export function FaqManager({ chatbotId, initialFaqs }: { chatbotId: string; init
             <div key={faq.id} className="rounded-md border p-2">
               <div className="flex items-start justify-between">
                 <p className="flex-1 font-bold">{faq.question}</p>
-                <Button variant="ghost" size="icon" onClick={() => handleDelete(faq.id)} disabled={isPending}>
+                <Button variant="ghost" size="sm" onClick={() => handleDelete(faq.id)} disabled={isPending}>
                   <Trash2 className="h-4 w-4 text-destructive" />
                 </Button>
               </div>

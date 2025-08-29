@@ -4,12 +4,10 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { createCustomerPortalSession } from '@/app/(dashboard)/actions'
+import { type UserProfile } from '@/lib/types'
 
 interface DashboardHeaderProps {
-  user: {
-    email?: string | null
-    subscription_status?: string | null
-  }
+  user: UserProfile;
 }
 
 export function DashboardHeader({ user }: DashboardHeaderProps) {
@@ -34,9 +32,9 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
           </form>
         )}
 
-        <Link href="/api/auth/logout">
-          <Button variant="outline">Sign Out</Button>
-        </Link>
+        <form action="/auth/signout" method="POST">
+          <Button type="submit" variant="outline">Sign Out</Button>
+        </form>
       </div>
     </header>
   )

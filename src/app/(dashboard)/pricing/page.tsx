@@ -1,6 +1,6 @@
 // src/app/(dashboard)/pricing/page.tsx
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Check } from 'lucide-react'
 import { createCheckoutSession } from '@/app/(dashboard)/actions'
 
@@ -26,7 +26,7 @@ export default function PricingPage() {
     <div className="mx-auto max-w-5xl space-y-6 p-6">
       <div className="space-y-2 text-center">
         <h1 className="text-3xl font-bold">Pricing Plans</h1>
-        <p className="text-muted-foreground">Choose the plan that's right for you.</p>
+        <p className="text-muted-foreground">Choose the plan that&apos;s right for you.</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -47,12 +47,12 @@ export default function PricingPage() {
                 ))}
               </ul>
             </CardContent>
-            <CardFooter>
+            <div className="p-5 border-t border-gray-100">
               <form action={createCheckoutSession} className="w-full">
                 <input type="hidden" name="priceId" value={tier.priceId} />
                 <Button type="submit" className="w-full">Subscribe</Button>
               </form>
-            </CardFooter>
+            </div>
           </Card>
         ))}
       </div>

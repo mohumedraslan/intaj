@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 import { createChatbot } from "@/app/(dashboard)/actions";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -39,8 +39,8 @@ export default function CreateChatbotForm({ userId }: { userId: string }) {
   const onSubmit = (values: ChatbotFormValues) => {
     startTransition(async () => {
       const result = await createChatbot({ ...values, userId });
-      if ((result as any)?.error) {
-        toast.error("Failed to create chatbot", { description: (result as any).error });
+      if (result?.error) {
+        toast.error("Failed to create chatbot", { description: result.error });
       } else {
         toast.success("Chatbot created successfully!");
         router.push("/dashboard");
@@ -55,11 +55,10 @@ export default function CreateChatbotForm({ userId }: { userId: string }) {
         <CardDescription>Define its name and core personality.</CardDescription>
       </CardHeader>
       <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
-              name={"name" as any}
+              name="name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Chatbot Name</FormLabel>
@@ -74,7 +73,7 @@ export default function CreateChatbotForm({ userId }: { userId: string }) {
 
             <FormField
               control={form.control}
-              name={"initial_prompt" as any}
+              name="initial_prompt"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Initial Prompt / Personality</FormLabel>
@@ -93,7 +92,6 @@ export default function CreateChatbotForm({ userId }: { userId: string }) {
               {isPending ? "Creating..." : "Create Chatbot"}
             </Button>
           </form>
-        </Form>
       </CardContent>
     </Card>
   );

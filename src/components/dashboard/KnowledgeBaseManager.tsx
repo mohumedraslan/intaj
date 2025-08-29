@@ -8,13 +8,7 @@ import { Input } from '@/components/ui/input'
 import { toast } from 'sonner'
 import { Upload, Trash2 } from 'lucide-react'
 import { addDataSource, deleteDataSource } from '@/app/(dashboard)/actions'
-
-type DataSource = {
-  id: string
-  file_name: string | null
-  status: string
-  created_at: string
-}
+import { type DataSource } from '@/lib/types'
 
 export function KnowledgeBaseManager({ chatbotId, initialDataSources }: { chatbotId: string; initialDataSources: DataSource[] }) {
   const [dataSources, setDataSources] = useState<DataSource[]>(initialDataSources)
@@ -27,8 +21,8 @@ export function KnowledgeBaseManager({ chatbotId, initialDataSources }: { chatbo
 
     startTransition(async () => {
       const result = await addDataSource(formData)
-      if ((result as any).error) {
-        toast.error('Upload Failed', { description: (result as any).error })
+      if (result?.error) {
+        toast.error('Upload Failed', { description: result.error })
       } else {
         toast.success('File uploaded successfully!')
       }
@@ -48,7 +42,7 @@ export function KnowledgeBaseManager({ chatbotId, initialDataSources }: { chatbo
       <CardHeader>
         <CardTitle>File Upload</CardTitle>
         <CardDescription>
-          Upload PDF or TXT files. The content will be processed and added to your bot's knowledge. (Processing logic will be added later).
+          Upload PDF or TXT files. The content will be processed and added to your bot&apos;s knowledge. (Processing logic will be added later).
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -70,7 +64,7 @@ export function KnowledgeBaseManager({ chatbotId, initialDataSources }: { chatbo
                 <p className="font-medium">{source.file_name ?? 'Untitled file'}</p>
                 <p className="text-xs text-muted-foreground">Status: {source.status}</p>
               </div>
-              <Button variant="ghost" size="icon" onClick={() => handleDelete(source.id)} disabled={isPending}>
+              <Button variant="ghost" size="sm" onClick={() => handleDelete(source.id)} disabled={isPending}>
                 <Trash2 className="h-4 w-4 text-destructive" />
               </Button>
             </div>

@@ -16,7 +16,7 @@ export default async function ChatbotPage({ params }: { params: { chatbotId: str
     .from('chatbots')
     .select('*')
     .eq('id', params.chatbotId)
-    .eq('user_id', (user as any).id)
+    .eq('user_id', user.id)
     .single()
 
   if (error || !chatbot) {

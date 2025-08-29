@@ -15,7 +15,7 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen">
-      <DashboardHeader user={{ email: user.email, subscription_status: (user as any).subscription_status }} />
+      <DashboardHeader user={user} />
       <main className="mx-auto max-w-6xl p-6">
         {children}
       </main>
