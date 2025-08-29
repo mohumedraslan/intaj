@@ -1,0 +1,45 @@
+// src/components/dashboard/DashboardHeader.tsx
+'use client'
+
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { createCustomerPortalSession } from '@/app/(dashboard)/actions'
+
+interface DashboardHeaderProps {
+  user: {
+    email?: string | null
+    subscription_status?: string | null
+  }
+}
+
+export function DashboardHeader({ user }: DashboardHeaderProps) {
+  const isSubscribed = user.subscription_status === 'active' || user.subscription_status === 'trialing'
+
+  return (
+    <header className="flex items-center justify-between border-b bg-background p-4">
+      <Link href="/dashboard" className="text-xl font-semibold">
+        Intaj
+      </Link>
+
+      <div className="flex items-center gap-3">
+        <span className="hidden text-sm text-muted-foreground md:inline">{user.email}</span>
+
+        {!isSubscribed ? (
+          <Link href="/pricing">
+            <Button variant="default">Upgrade</Button>
+          </Link>
+        ) : (
+          <form action={createCustomerPortalSession}>
+            <Button type="submit" variant="secondary">Manage Billing</Button>
+          </form>
+        )}
+
+        <Link href="/api/auth/logout">
+          <Button variant="outline">Sign Out</Button>
+        </Link>
+      </div>
+    </header>
+  )
+}
+
+
