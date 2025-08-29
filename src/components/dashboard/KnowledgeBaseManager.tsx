@@ -56,7 +56,11 @@ export function KnowledgeBaseManager({ chatbotId, initialDataSources }: { chatbo
         <div className="space-y-2">
           <h3 className="font-semibold">Uploaded Sources</h3>
           {dataSources.length === 0 && (
-            <p className="text-sm text-muted-foreground">No files uploaded yet.</p>
+            <div className="text-center py-6 border-2 border-dashed border-gray-200 rounded-lg">
+              <Upload className="mx-auto h-12 w-12 text-gray-400 mb-2" />
+              <p className="text-sm text-gray-600">No files uploaded yet.</p>
+              <p className="text-xs text-gray-500 mt-1">Upload PDF or TXT files to enhance your bot&apos;s knowledge base.</p>
+            </div>
           )}
           {dataSources.map((source) => (
             <div key={source.id} className="flex items-center justify-between rounded-md border p-2">

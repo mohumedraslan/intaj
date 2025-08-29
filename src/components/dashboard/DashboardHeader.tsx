@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { createCustomerPortalSession } from '@/app/(dashboard)/actions'
 import { type UserProfile } from '@/lib/types'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 interface DashboardHeaderProps {
   user: UserProfile;
@@ -20,21 +22,43 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
       </Link>
 
       <div className="flex items-center gap-3">
-        <span className="hidden text-sm text-muted-foreground md:inline">{user.email}</span>
-
-        {!isSubscribed ? (
+        {!isSubscribed && (
           <Link href="/pricing">
-            <Button variant="default">Upgrade</Button>
+            <Button variant="default">Upgrade to Pro</Button>
           </Link>
-        ) : (
-          <form action={createCustomerPortalSession}>
-            <Button type="submit" variant="secondary">Manage Billing</Button>
-          </form>
         )}
 
-        <form action="/auth/signout" method="POST">
-          <Button type="submit" variant="outline">Sign Out</Button>
-        </form>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="flex items-center gap-2">
+              <span className="hidden text-sm md:inline">{user.email}</span>
+              <ChevronDown className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            
+            {isSubscribed && (
+              <form action={createCustomerPortalSession}>
+                <DropdownMenuItem asChild>
+                  <button type="submit" className="w-full text-left">
+                    Manage Billing
+                  </button>
+                </DropdownMenuItem>
+              </form>
+            )}
+            
+            <DropdownMenuSeparator />
+            <form action="/auth/signout" method="POST">
+              <DropdownMenuItem asChild>
+                <button type="submit" className="w-full text-left">
+                  Sign Out
+                </button>
+              </DropdownMenuItem>
+            </form>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   )

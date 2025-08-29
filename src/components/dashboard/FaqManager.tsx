@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
-import { Plus, Trash2 } from 'lucide-react'
+import { Plus, Trash2, HelpCircle } from 'lucide-react'
 import { addFaq, deleteFaq } from '@/app/(dashboard)/actions'
 import { type Faq } from '@/lib/types'
 
@@ -64,7 +64,13 @@ export function FaqManager({ chatbotId, initialFaqs }: { chatbotId: string; init
 
         <div className="space-y-2">
           <h3 className="font-semibold">Existing FAQs</h3>
-          {faqs.length === 0 && <p className="text-sm text-muted-foreground">No FAQs added yet.</p>}
+          {faqs.length === 0 && (
+            <div className="text-center py-6 border-2 border-dashed border-gray-200 rounded-lg">
+              <HelpCircle className="mx-auto h-12 w-12 text-gray-400 mb-2" />
+              <p className="text-sm text-gray-600">No FAQs added yet.</p>
+              <p className="text-xs text-gray-500 mt-1">Add your first FAQ to help your bot answer common questions.</p>
+            </div>
+          )}
           {faqs.map((faq) => (
             <div key={faq.id} className="rounded-md border p-2">
               <div className="flex items-start justify-between">

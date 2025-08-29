@@ -1,4 +1,5 @@
 // src/app/(dashboard)/dashboard/page.tsx
+import { Suspense } from 'react';
 import { getSession } from '@/app/auth/actions';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
@@ -6,8 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { PlusCircle, MessageSquare, Settings, BarChart } from 'lucide-react';
+import { DashboardSkeleton } from '@/components/dashboard/DashboardSkeleton';
 
-export default async function DashboardPage() {
+// Create a new async component for the main content
+async function DashboardContent() {
   const { user } = await getSession();
   if (!user) {
     redirect('/login');
@@ -75,10 +78,16 @@ export default async function DashboardPage() {
               ))}
             </div>
           ) : (
-            <div className="text-center space-y-4">
-              <p>You haven&apos;t created any chatbots yet.</p>
+            <div className="text-center space-y-4 py-8">
+              <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                <MessageSquare className="w-12 h-12 text-gray-400" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900">No chatbots yet</h3>
+              <p className="text-gray-600 max-w-md mx-auto">
+                Create your first AI chatbot to start building intelligent conversations and providing value to your users.
+              </p>
               <Link href="/chatbots/create">
-                <Button>
+                <Button className="mt-4">
                   <PlusCircle className="mr-2 h-4 w-4" />
                   Create Your First Chatbot
                 </Button>
@@ -92,6 +101,14 @@ export default async function DashboardPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<DashboardSkeleton />}>
+      <DashboardContent />
+    </Suspense>
   );
 }
 

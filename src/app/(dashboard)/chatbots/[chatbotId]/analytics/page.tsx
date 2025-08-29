@@ -53,6 +53,11 @@ export default async function AnalyticsPage({ params }: { params: { chatbotId: s
             <p className="text-xs text-muted-foreground">
               Total messages exchanged with this bot.
             </p>
+            {totalMessages === 0 && (
+              <p className="text-xs text-blue-600 mt-2">
+                💡 Have a test conversation with your bot to see messages appear here.
+              </p>
+            )}
           </CardContent>
         </Card>
 
