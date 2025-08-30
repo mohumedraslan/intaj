@@ -1,36 +1,204 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Intaj - AI Chatbot SaaS Platform
 
-## Getting Started
+Intaj is a comprehensive AI-powered chatbot platform that enables businesses and individuals to create, customize, and deploy intelligent conversational AI assistants without any technical expertise.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### **Zero-Friction Free Tier**
+- **1 Free Chatbot**: Create your first AI assistant at no cost
+- **100 Messages/month**: Test and validate your chatbot
+- **Guided Onboarding**: Step-by-step setup process for new users
+- **No Credit Card Required**: Start building immediately
+
+### **AI-Powered Intelligence**
+- Natural language processing with context awareness
+- Human-like responses that feel authentic and helpful
+- Multi-turn conversations that maintain context
+- Customizable personality and brand voice
+
+### **Knowledge Management**
+- Upload documents, PDFs, and text files
+- Create custom FAQs for common questions
+- Real-time knowledge updates
+- Intelligent information retrieval
+
+### **Analytics & Insights**
+- Track conversation metrics and engagement
+- Monitor chatbot performance with detailed conversation history
+- Provide feedback on AI responses to improve quality
+- Identify popular topics and user pain points
+- Measure customer satisfaction through feedback
+
+### **Subscription Plans**
+- **Free**: 1 chatbot, 100 messages/month
+- **Pro**: 5 chatbots, 10,000 messages/month, file uploads
+- **Business**: Unlimited chatbots, 50,000 messages/month, API access
+
+### **Help & Support**
+- Comprehensive documentation and FAQs
+- Quick start guide for new users
+- Contact support via email
+- Best practices and tips for success
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS, Shadcn UI components
+- **Backend**: Next.js App Router, Server Actions
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **AI**: OpenAI GPT models
+- **Payments**: Stripe
+- **Deployment**: Vercel
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Supabase account
+- OpenAI API key
+- Stripe account (for payments)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd ai-chatbot-saas
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env.local` file with:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+   OPENAI_API_KEY=your_openai_api_key
+   STRIPE_SECRET_KEY=your_stripe_secret_key
+   STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+   ```
+
+4. **Set up the database**
+   Run the SQL scripts in your Supabase SQL Editor to create the necessary tables and policies.
+
+5. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── (dashboard)/        # Protected dashboard routes
+│   │   └── help/          # Help & documentation page
+│   ├── api/               # API routes
+│   ├── auth/              # Authentication routes
+│   └── login/             # Login page
+├── components/            # React components
+│   ├── dashboard/         # Dashboard-specific components
+│   ├── landing/           # Landing page components
+│   └── ui/               # Reusable UI components
+└── lib/                  # Utility libraries
+    ├── supabase/         # Supabase client configuration
+    └── types.ts          # TypeScript type definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Key Features Implementation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### **Zero-Friction Onboarding**
+- Guided checklist for new users
+- Free tier with immediate access
+- No payment barriers during signup
+- Step-by-step chatbot creation process
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **Smart Routing**
+- Automatic redirects based on authentication status
+- Protected routes with proper access control
+- Seamless user experience flow
 
-## Learn More
+### **Type Safety**
+- Comprehensive TypeScript implementation
+- Strong typing for all data structures
+- Error-free development experience
 
-To learn more about Next.js, take a look at the following resources:
+### **Production Ready**
+- Server-side logging for debugging
+- Error handling and user feedback
+- Responsive design for all devices
+- Optimized performance with Next.js
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **Available Scripts**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
-## Deploy on Vercel
+### **Database Schema**
+The application uses the following main tables:
+- `profiles` - User profiles and subscription data
+- `chatbots` - Chatbot configurations
+- `messages` - Conversation history for analytics (with feedback)
+- `faqs` - Custom FAQ entries
+- `data_sources` - Uploaded knowledge base files
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Recent Updates:**
+- Added `feedback` column to `messages` table for user feedback on AI responses
+- Created `feedback_status` ENUM type for consistent feedback values
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 Deployment
+
+### **Vercel Deployment**
+1. Connect your GitHub repository to Vercel
+2. Configure environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### **Environment Variables**
+Ensure all required environment variables are set in your production environment:
+- Supabase configuration
+- OpenAI API key
+- Stripe keys
+- Webhook secrets
+
+## 📈 Analytics & Monitoring
+
+The platform includes comprehensive logging and analytics:
+- Server-side logging for debugging production issues
+- Real-time conversation tracking
+- User engagement metrics
+- Performance monitoring
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🆘 Support
+
+For support and questions:
+- Check the documentation
+- Open an issue on GitHub
+- Contact the development team
+
+---
+
+**Intaj** - Transform your customer interactions with AI-powered chatbots.

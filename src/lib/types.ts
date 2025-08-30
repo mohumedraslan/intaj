@@ -26,8 +26,10 @@ export interface Chatbot {
 
 // A conversation message
 export interface Message {
+  id?: string; // Messages from the DB will have an ID
   role: 'user' | 'assistant' | 'system';
   content: string;
+  feedback?: 'good' | 'bad' | null; // Feedback is optional
 }
 
 // FAQ object

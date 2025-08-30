@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { PlusCircle, MessageSquare, Settings, BarChart } from 'lucide-react';
 import { DashboardSkeleton } from '@/components/dashboard/DashboardSkeleton';
+import { OnboardingGuide } from '@/components/dashboard/OnboardingGuide';
 
 // Create a new async component for the main content
 async function DashboardContent() {
@@ -25,17 +26,23 @@ async function DashboardContent() {
 
   return (
     <div className="space-y-6">
+      {/* NEW: Display the onboarding guide */}
+      <OnboardingGuide chatbotCount={chatbots?.length ?? 0} />
+      
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">My Chatbots</h1>
           <p className="text-sm text-muted-foreground">Your AI Assistants</p>
         </div>
-        <Link href="/chatbots/create">
-          <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Create New Chatbot
-          </Button>
-        </Link>
+        {/* Only show the create button here if they are past the onboarding */}
+        {(chatbots?.length ?? 0) > 0 && (
+          <Link href="/chatbots/create">
+            <Button>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Create New Chatbot
+            </Button>
+          </Link>
+        )}
       </div>
 
       <Card>

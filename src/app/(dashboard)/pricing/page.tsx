@@ -6,6 +6,13 @@ import { createCheckoutSession } from '@/app/(dashboard)/actions'
 
 const tiers = [
   {
+    name: 'Free',
+    priceId: null, // No price ID for the free plan
+    price: '$0',
+    description: 'Perfect for getting started and personal projects.',
+    features: ['1 Chatbot', '100 Messages/mo', 'Limited Knowledge Base'],
+  },
+  {
     name: 'Pro',
     priceId: 'price_...', // Replace with your real Stripe Price ID
     price: '$20',
@@ -48,10 +55,16 @@ export default function PricingPage() {
               </ul>
             </CardContent>
             <div className="p-5 border-t border-gray-100">
-              <form action={createCheckoutSession} className="w-full">
-                <input type="hidden" name="priceId" value={tier.priceId} />
-                <Button type="submit" className="w-full">Subscribe</Button>
-              </form>
+              {tier.priceId ? (
+                <form action={createCheckoutSession} className="w-full">
+                  <input type="hidden" name="priceId" value={tier.priceId} />
+                  <Button type="submit" className="w-full">Subscribe</Button>
+                </form>
+              ) : (
+                <Button className="w-full" variant="outline" disabled>
+                  Your Current Plan
+                </Button>
+              )}
             </div>
           </Card>
         ))}

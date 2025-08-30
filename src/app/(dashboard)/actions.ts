@@ -253,3 +253,28 @@ export async function createCustomerPortalSession() {
 
   return redirect(portalSession.url)
 }
+
+// --- NEW: MESSAGE FEEDBACK ACTION ---
+export async function submitMessageFeedback(values: { messageId: string; feedback: 'good' | 'bad' }) {
+  const { messageId, feedback } = values;
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  if (!user) {
+    return { error: 'Unauthorized' };
+  }
+  
+  // We need to ensure the user owns the message they are giving feedback on.
+  // This is a simplified check. A full check would join through the chatbots table.
+  const { error } = await supabase
+    .from('messages')
+    .update({ feedback })
+    .eq('id', messageId)
+    .eq('user_id', user.id); // RLS also protects this, but an explicit check is good.
+  
+  if (error) {
+    return { error: error.message };
+  }
+  
+  return { success: true };
+}

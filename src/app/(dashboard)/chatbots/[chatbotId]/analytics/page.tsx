@@ -4,6 +4,7 @@ import { notFound, redirect } from 'next/navigation';
 import { getSession } from '@/app/auth/actions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MessageSquare, Users } from 'lucide-react';
+import { RecentConversations } from '@/components/dashboard/RecentConversations';
 
 export default async function AnalyticsPage({ params }: { params: { chatbotId: string } }) {
   const { user } = await getSession();
@@ -30,6 +31,14 @@ export default async function AnalyticsPage({ params }: { params: { chatbotId: s
   // To get unique conversations, we can count distinct session IDs in the future.
   // For now, we'll just show a placeholder.
   const totalConversations = 'N/A'; // Placeholder for now
+
+  // NEW: Fetch the last 20 messages for this chatbot
+  const { data: recentMessages } = await supabase
+    .from('messages')
+    .select('*')
+    .eq('chatbot_id', params.chatbotId)
+    .order('created_at', { ascending: false })
+    .limit(20);
 
   return (
     <div className="space-y-6">
@@ -74,6 +83,9 @@ export default async function AnalyticsPage({ params }: { params: { chatbotId: s
           </CardContent>
         </Card>
       </div>
+
+      {/* NEW: Recent Conversations Section */}
+      <RecentConversations initialMessages={recentMessages || []} />
     </div>
   );
 }
