@@ -113,7 +113,7 @@ export function PublicChatInterface() {
             onKeyDown={(e) => e.key === 'Enter' && !isPending && handleSendMessage()}
             placeholder="Ask a question..."
             disabled={isPending}
-            className="flex-1"
+            className="flex-1 text-black"
           />
           <Button
             onClick={handleSendMessage}

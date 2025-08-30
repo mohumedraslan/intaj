@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { createCustomerPortalSession } from '@/app/(dashboard)/actions'
 import { type UserProfile } from '@/lib/types'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown, HelpCircle, User, Link as LinkIcon } from "lucide-react";
 
 interface DashboardHeaderProps {
   user: UserProfile;
@@ -38,6 +38,20 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
+            
+            <DropdownMenuItem asChild>
+              <Link href="/profile" className="w-full text-left">
+                <User className="mr-2 h-4 w-4" />
+                Profile
+              </Link>
+            </DropdownMenuItem>
+            
+            <DropdownMenuItem asChild>
+              <Link href="/connections" className="w-full text-left">
+                <LinkIcon className="mr-2 h-4 w-4" />
+                Platform Connections
+              </Link>
+            </DropdownMenuItem>
             
             <DropdownMenuItem asChild>
               <Link href="/help" className="w-full text-left">

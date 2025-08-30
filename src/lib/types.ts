@@ -32,6 +32,29 @@ export interface Message {
   feedback?: 'good' | 'bad' | null; // Feedback is optional
 }
 
+// Platform connection
+export interface Connection {
+  id: string;
+  user_id: string;
+  platform: 'WhatsApp' | 'Facebook' | 'Instagram' | 'Website';
+  display_name: string;
+  credentials?: Record<string, unknown>;
+  is_active: boolean;
+  created_at: string;
+}
+
+// Update Chatbot interface to include connection and model
+export interface Chatbot {
+  id: string;
+  user_id: string;
+  name: string;
+  initial_prompt: string | null;
+  connection_id?: string | null;
+  model?: string | null;
+  created_at: string;
+  updated_at: string | null;
+}
+
 // FAQ object
 export interface Faq {
   id: string;

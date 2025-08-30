@@ -42,8 +42,15 @@ export async function createChatbot(values: {
   return { success: true }
 }
 
-// --- NEW: OpenAI Client Initialization ---
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+// --- NEW: OpenRouter Client Initialization ---
+const openrouter = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey: process.env.OPENROUTER_API_KEY,
+  defaultHeaders: {
+    "HTTP-Referer": process.env.NEXT_PUBLIC_SITE_URL, // Required for free models
+    "X-Title": "Intaj AI", // Optional: Your app name
+  },
+})
 const stripe = new Stripe(process.env.STRIPE_API_KEY as string)
 
 // --- REAL AI IMPLEMENTATION (RAG UPGRADE) ---
@@ -54,8 +61,8 @@ export async function getAiResponse(values: {
 }) {
   const { chatbotId, prompt, history } = values
 
-  if (!process.env.OPENAI_API_KEY) {
-    return { response: 'Error: OpenAI API key is not configured on the server.' }
+  if (!process.env.OPENROUTER_API_KEY) {
+    return { response: 'Error: OpenRouter API key is not configured on the server.' }
   }
 
   const supabase = await createClient()
@@ -104,8 +111,17 @@ export async function getAiResponse(values: {
 
   // --- GENERATION STEP ---
   try {
-    const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+    // Fetch the chatbot's specific model if it exists
+    const { data: chatbot } = await supabase
+      .from('chatbots')
+      .select('model')
+      .eq('id', chatbotId)
+      .single();
+    
+    const modelToUse = chatbot?.model || process.env.OPENROUTER_MODEL || 'mistralai/mistral-7b-instruct:free';
+    
+    const response = await openrouter.chat.completions.create({
+      model: modelToUse,
       messages: [systemMessage, ...conversationHistory],
       temperature: 0.5,
       max_tokens: 250,
@@ -124,7 +140,7 @@ export async function getAiResponse(values: {
     
     return { response: aiResponse }
   } catch (error) {
-    console.error('OpenAI API Error:', error)
+    console.error('OpenRouter API Error:', error)
     return { response: 'An error occurred while contacting the AI. Please check the server logs.' }
   }
 }
@@ -276,5 +292,34 @@ export async function submitMessageFeedback(values: { messageId: string; feedbac
     return { error: error.message };
   }
   
+  return { success: true };
+}
+
+// --- NEW: PLATFORM CONNECTION ACTIONS ---
+export async function assignChatbotToConnection(formData: FormData) {
+  const chatbotId = formData.get('chatbotId') as string;
+  const connectionId = formData.get('connectionId') as string;
+  const supabase = await createClient();
+  
+  await supabase
+    .from('chatbots')
+    .update({ connection_id: connectionId === 'null' ? null : connectionId })
+    .eq('id', chatbotId);
+  
+  revalidatePath(`/chatbots/${chatbotId}/manage`);
+  return { success: true };
+}
+
+export async function updateChatbotModel(formData: FormData) {
+  const chatbotId = formData.get('chatbotId') as string;
+  const model = formData.get('model') as string;
+  const supabase = await createClient();
+  
+  await supabase
+    .from('chatbots')
+    .update({ model })
+    .eq('id', chatbotId);
+  
+  revalidatePath(`/chatbots/${chatbotId}/manage`);
   return { success: true };
 }

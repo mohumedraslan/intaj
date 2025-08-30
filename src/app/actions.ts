@@ -4,8 +4,13 @@
 import OpenAI from 'openai';
 import { type Message } from '@/lib/types';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+const openrouter = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey: process.env.OPENROUTER_API_KEY,
+  defaultHeaders: {
+    "HTTP-Referer": process.env.NEXT_PUBLIC_SITE_URL, // Required for free models
+    "X-Title": "Intaj AI", // Optional: Your app name
+  },
 });
 
 const demoBotPrompt = `You are a helpful and enthusiastic sales assistant for a SaaS company called "Intaj". Your goal is to answer questions about Intaj and encourage users to sign up.
@@ -19,13 +24,13 @@ Intaj is an AI chatbot platform that allows users to:
 Keep your answers concise, friendly, and always steer the conversation towards the benefits of signing up for a free trial.`;
 
 export async function getPublicAiResponse(values: { history: Message[] }) {
-  if (!process.env.OPENAI_API_KEY) {
+  if (!process.env.OPENROUTER_API_KEY) {
     return { response: "Sorry, our demo is currently offline. Please try again later." };
   }
 
   try {
-    const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+    const response = await openrouter.chat.completions.create({
+      model: process.env.OPENROUTER_MODEL || 'mistralai/mistral-7b-instruct:free',
       messages: [
         { role: 'system', content: demoBotPrompt },
         ...values.history
@@ -36,7 +41,7 @@ export async function getPublicAiResponse(values: { history: Message[] }) {
 
     return { response: response.choices[0]?.message?.content };
   } catch (error) {
-    console.error("Public AI Error:", error);
+    console.error("OpenRouter Public API Error:", error);
     return { response: "Sorry, I encountered an error. Please try asking something else." };
   }
 }

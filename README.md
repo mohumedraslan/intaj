@@ -40,6 +40,18 @@ Intaj is a comprehensive AI-powered chatbot platform that enables businesses and
 - Contact support via email
 - Best practices and tips for success
 
+### **Platform Connections**
+- Connect chatbots to WhatsApp, Facebook, Instagram, and websites
+- Manage platform integrations from a central dashboard
+- Assign specific chatbots to different platforms
+- Secure credential storage for API keys and tokens
+
+### **AI Model Selection**
+- Choose from multiple AI models including free options
+- OpenRouter integration for cost-effective AI access
+- Per-chatbot model configuration
+- Support for Mistral, OpenAI, Google, and Anthropic models
+
 ## 🛠️ Tech Stack
 
 - **Frontend**: Next.js 15, React 19, TypeScript
@@ -47,7 +59,7 @@ Intaj is a comprehensive AI-powered chatbot platform that enables businesses and
 - **Backend**: Next.js App Router, Server Actions
 - **Database**: Supabase (PostgreSQL)
 - **Authentication**: Supabase Auth
-- **AI**: OpenAI GPT models
+- **AI**: OpenRouter (Mistral, OpenAI, Google, Anthropic models)
 - **Payments**: Stripe
 - **Deployment**: Vercel
 
@@ -79,7 +91,9 @@ Intaj is a comprehensive AI-powered chatbot platform that enables businesses and
    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-   OPENAI_API_KEY=your_openai_api_key
+   OPENROUTER_API_KEY=your_openrouter_api_key
+   OPENROUTER_MODEL=mistralai/mistral-7b-instruct:free
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
    STRIPE_SECRET_KEY=your_stripe_secret_key
    STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
    ```
@@ -101,7 +115,9 @@ Intaj is a comprehensive AI-powered chatbot platform that enables businesses and
 src/
 ├── app/                    # Next.js App Router
 │   ├── (dashboard)/        # Protected dashboard routes
-│   │   └── help/          # Help & documentation page
+│   │   ├── help/          # Help & documentation page
+│   │   ├── connections/   # Platform connections management
+│   │   └── profile/       # User profile and settings
 │   ├── api/               # API routes
 │   ├── auth/              # Authentication routes
 │   └── login/             # Login page
