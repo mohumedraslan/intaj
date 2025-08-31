@@ -5,7 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { User, Mail, Shield, CreditCard } from 'lucide-react';
+import { requestDataExport } from '@/app/(dashboard)/actions';
 
 export default async function ProfilePage() {
   const { user } = await getSession();
@@ -46,8 +48,8 @@ export default async function ProfilePage() {
   return (
     <div className="max-w-4xl mx-auto space-y-6 p-6">
       <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-gray-900">My Profile</h1>
-        <p className="text-lg text-gray-600">
+        <h1 className="text-3xl font-bold text-text">My Profile</h1>
+        <p className="text-lg text-muted">
           Manage your account information and preferences
         </p>
       </div>
@@ -74,7 +76,7 @@ export default async function ProfilePage() {
                 id="email"
                 value={user.email || 'No email provided'}
                 disabled
-                className="bg-gray-50"
+                className="bg-muted"
               />
             </div>
 
@@ -106,7 +108,7 @@ export default async function ProfilePage() {
 
             <div className="space-y-2">
               <Label>Customer ID</Label>
-              <div className="text-sm text-gray-600 font-mono bg-gray-50 px-3 py-2 rounded border">
+              <div className="text-sm text-muted-foreground font-mono bg-muted px-3 py-2 rounded border">
                 {user.stripe_customer_id || 'Not available'}
               </div>
             </div>
@@ -126,39 +128,39 @@ export default async function ProfilePage() {
           <div className="grid md:grid-cols-2 gap-4">
             <div className="p-4 border rounded-lg">
               <h4 className="font-semibold mb-2">Help & Support</h4>
-              <p className="text-sm text-gray-600 mb-3">
-                Get help with using the platform and find answers to common questions.
-              </p>
-              <a 
-                href="/help" 
-                className="text-blue-600 hover:text-blue-700 text-sm font-medium"
-              >
-                View Help Center →
-              </a>
+                              <p className="text-sm text-muted-foreground mb-3">
+                  Get help with using the platform and find answers to common questions.
+                </p>
+                <a 
+                  href="/help" 
+                  className="text-primary hover:text-primary/80 text-sm font-medium"
+                >
+                  View Help Center →
+                </a>
             </div>
 
             <div className="p-4 border rounded-lg">
               <h4 className="font-semibold mb-2">Billing Management</h4>
-              <p className="text-sm text-gray-600 mb-3">
-                Update your subscription, payment method, and billing information.
-              </p>
-              {user.subscription_status === 'active' || user.subscription_status === 'trialing' ? (
-                <form action="/api/create-customer-portal" method="POST">
-                  <button 
-                    type="submit"
-                    className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                              <p className="text-sm text-muted-foreground mb-3">
+                  Update your subscription, payment method, and billing information.
+                </p>
+                {user.subscription_status === 'active' || user.subscription_status === 'trialing' ? (
+                  <form action="/api/create-customer-portal" method="POST">
+                    <button 
+                      type="submit"
+                      className="text-primary hover:text-primary/80 text-sm font-medium"
+                    >
+                      Manage Billing →
+                    </button>
+                  </form>
+                ) : (
+                  <a 
+                    href="/pricing" 
+                    className="text-primary hover:text-primary/80 text-sm font-medium"
                   >
-                    Manage Billing →
-                  </button>
-                </form>
-              ) : (
-                <a 
-                  href="/pricing" 
-                  className="text-blue-600 hover:text-blue-700 text-sm font-medium"
-                >
-                  View Plans →
-                </a>
-              )}
+                    View Plans →
+                  </a>
+                )}
             </div>
           </div>
         </CardContent>
@@ -177,7 +179,7 @@ export default async function ProfilePage() {
             <div className="flex items-center justify-between p-4 border rounded-lg">
               <div>
                 <h4 className="font-semibold">Two-Factor Authentication</h4>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-muted-foreground">
                   Add an extra layer of security to your account
                 </p>
               </div>
@@ -187,11 +189,15 @@ export default async function ProfilePage() {
             <div className="flex items-center justify-between p-4 border rounded-lg">
               <div>
                 <h4 className="font-semibold">Data Export</h4>
-                <p className="text-sm text-gray-600">
-                  Download your data and chatbot information
+                <p className="text-sm text-muted-foreground">
+                  We will compile your data and email it to you within 24 hours.
                 </p>
               </div>
-              <Badge variant="outline">Coming Soon</Badge>
+              <form action={requestDataExport}>
+                <Button type="submit" variant="outline" size="sm">
+                  Request Export
+                </Button>
+              </form>
             </div>
           </div>
         </CardContent>

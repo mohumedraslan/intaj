@@ -96,6 +96,9 @@ Intaj is a comprehensive AI-powered chatbot platform that enables businesses and
    NEXT_PUBLIC_SITE_URL=http://localhost:3000
    STRIPE_SECRET_KEY=your_stripe_secret_key
    STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+   FACEBOOK_APP_ID=your_facebook_app_id
+   FACEBOOK_APP_SECRET=your_facebook_app_secret
+   ENCRYPTION_SECRET_KEY=your_32_character_encryption_key
    ```
 
 4. **Set up the database**
@@ -114,20 +117,30 @@ Intaj is a comprehensive AI-powered chatbot platform that enables businesses and
 ```
 src/
 ├── app/                    # Next.js App Router
-│   ├── (dashboard)/        # Protected dashboard routes
-│   │   ├── help/          # Help & documentation page
-│   │   ├── connections/   # Platform connections management
-│   │   └── profile/       # User profile and settings
+│   ├── (auth)/            # Authentication routes
+│   │   ├── signup/        # User registration
+│   │   └── signout/       # Sign out handling
+│   ├── (dashboard)/       # Protected dashboard routes
+│   │   ├── analytics/     # Analytics dashboard
+│   │   ├── chatbots/      # Chatbot management
+│   │   ├── connections/   # Platform connections
+│   │   ├── dashboard/     # Main dashboard
+│   │   ├── help/          # Help & documentation
+│   │   ├── pricing/       # Subscription plans
+│   │   └── profile/       # User profile settings
 │   ├── api/               # API routes
-│   ├── auth/              # Authentication routes
+│   │   └── auth/          # OAuth callbacks
 │   └── login/             # Login page
 ├── components/            # React components
-│   ├── dashboard/         # Dashboard-specific components
+│   ├── dashboard/         # Dashboard components
+│   │   ├── Sidebar.tsx    # Main navigation sidebar
+│   │   └── ...            # Other dashboard components
 │   ├── landing/           # Landing page components
 │   └── ui/               # Reusable UI components
 └── lib/                  # Utility libraries
-    ├── supabase/         # Supabase client configuration
-    └── types.ts          # TypeScript type definitions
+    ├── encryption.ts      # Secure credential encryption
+    ├── supabase/          # Supabase configuration
+    └── types.ts           # TypeScript definitions
 ```
 
 ## 🎯 Key Features Implementation
@@ -154,6 +167,45 @@ src/
 - Responsive design for all devices
 - Optimized performance with Next.js
 
+### **Platform Integration**
+- **Facebook & Instagram OAuth**: Complete OAuth flow with secure credential storage
+- **Secure Credential Encryption**: AES-256-GCM encryption for all platform tokens
+- **Multi-Platform Deployment**: Connect chatbots to WhatsApp, Facebook, Instagram, and websites
+- **Real-Time Connection Management**: Visual platform connection dashboard
+- **Automatic Instagram Detection**: Automatically discover Instagram accounts linked to Facebook Pages
+
+### **Professional AI Theme**
+- **60/30/10 Color Rule**: Deep dark blue (60%), lighter dark blue (30%), vibrant teal accent (10%)
+- **Dark Theme by Default**: Professional, modern appearance
+- **High Contrast**: Optimized for readability and accessibility
+- **Consistent Branding**: Unified color system throughout the application
+
+### **User Data & Privacy**
+- **Data Export Functionality**: GDPR-compliant data export requests
+- **Profile Management**: Comprehensive account information and settings
+- **Privacy Controls**: User data management and export capabilities
+- **Trust Building**: Transparent data handling and user control
+
+### **Interactive User Experience**
+- **Dashboard Demo Agent**: AI-powered guidance for new users
+- **Smart Suggestions**: Quick-start question buttons for common queries
+- **Real-Time AI Responses**: Live chat interface with OpenRouter integration
+- **User Onboarding**: Guided experience for first-time users
+- **Dynamic Content Hub**: AI news feed, success stories, and consulting services
+- **Engagement Features**: Real-time news, motivational content, and professional services
+
+### **Future-Ready Architecture**
+- **Automation Framework**: Foundation for complex workflow automation
+- **Workflow Navigation**: Sidebar integration for upcoming features
+- **Scalable Design**: Easy to add new automation types and integrations
+- **Product Vision**: Clear roadmap for advanced automation capabilities
+
+### **Business Model & Revenue Streams**
+- **Multi-Tier Pricing**: Free, Pro, Business, and Enterprise tiers
+- **Enterprise Solutions**: Custom AI agents and workflow automation
+- **Consulting Services**: ML, DL, NLP, and SEO expertise
+- **Strategic Partnerships**: Integration with rabt.nabih.tech for development
+
 ## 🔧 Development
 
 ### **Available Scripts**
@@ -165,14 +217,19 @@ src/
 ### **Database Schema**
 The application uses the following main tables:
 - `profiles` - User profiles and subscription data
-- `chatbots` - Chatbot configurations
+- `chatbots` - Chatbot configurations (with platform connections and AI model selection)
 - `messages` - Conversation history for analytics (with feedback)
 - `faqs` - Custom FAQ entries
 - `data_sources` - Uploaded knowledge base files
+- `connections` - Platform integrations (Facebook, Instagram, WhatsApp, Website)
 
 **Recent Updates:**
 - Added `feedback` column to `messages` table for user feedback on AI responses
 - Created `feedback_status` ENUM type for consistent feedback values
+- Added `connections` table for platform integrations
+- Added `connection_id` and `model` columns to `chatbots` table
+- Implemented Facebook & Instagram OAuth integration
+- Added secure credential encryption for platform tokens
 
 ## 🚀 Deployment
 

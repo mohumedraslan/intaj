@@ -1,26 +1,100 @@
-@import "tailwindcss";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+  :root {
+    /* New High-Contrast Dark Theme */
+    --brand-500: 214 100% 59%; /* #2A6EE8 - Vibrant Blue */
+    --bg: 220 13% 8%; /* #0D1117 - Deepest Dark for background */
+    --card-bg: 220 13% 11%; /* #161B22 - Lighter charcoal for cards/panels */
+    --text: 210 40% 98%; /* #F0F6FC - Light gray/white for text */
+    --muted: 220 13% 60%; /* #8B949E - Muted gray for secondary text */
+    --accent: 195 100% 50%; /* #30B0C8 - Vibrant Cyan for CTAs */
+    --border: 220 13% 20%; /* #30363D - Subtle borders */
+    --input: 220 13% 15%; /* #21262D - Input backgrounds */
+    --ring: 214 100% 59%; /* #2A6EE8 - Focus rings */
+    --radius: 0.5rem;
+    
+    /* Legacy compatibility */
+    --background: 220 13% 8%;
+    --foreground: 210 40% 98%;
+    --card: 220 13% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 220 13% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 214 100% 59%;
+    --primary-foreground: 220 13% 8%;
+    --secondary: 220 13% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 220 13% 15%;
+    --muted-foreground: 220 13% 60%;
+    --accent: 220 13% 15%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --input: 220 13% 15%;
+  }
+
+  .dark {
+    /* New High-Contrast Dark Theme */
+    --brand-500: 214 100% 59%; /* #2A6EE8 - Vibrant Blue */
+    --bg: 220 13% 8%; /* #0D1117 - Deepest Dark for background */
+    --card-bg: 220 13% 11%; /* #161B22 - Lighter charcoal for cards/panels */
+    --text: 210 40% 98%; /* #F0F6FC - Light gray/white for text */
+    --muted: 220 13% 60%; /* #8B949E - Muted gray for secondary text */
+    --accent: 195 100% 50%; /* #30B0C8 - Vibrant Cyan for CTAs */
+    --border: 220 13% 20%; /* #30363D - Subtle borders */
+    --input: 220 13% 15%; /* #21262D - Input backgrounds */
+    --ring: 214 100% 59%; /* #2A6EE8 - Focus rings */
+    --radius: 0.5rem;
+    
+    /* Legacy compatibility */
+    --background: 220 13% 8%;
+    --foreground: 210 40% 98%;
+    --card: 220 13% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 220 13% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 214 100% 59%;
+    --primary-foreground: 220 13% 8%;
+    --secondary: 220 13% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 220 13% 15%;
+    --muted-foreground: 220 13% 60%;
+    --accent: 220 13% 15%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --input: 220 13% 15%;
+  }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: hsl(var(--bg));
+  color: hsl(var(--text));
+  font-family: 'Inter', 'Almarai', Arial, Helvetica, sans-serif;
 }

@@ -21,7 +21,7 @@ export default async function CreateChatbotPage() {
         </CardHeader>
         <CardContent>
           <p>
-            You will be able to create and manage AI chatbots as soon as your account is approved.
+            You will be able to create and manage AI agents as soon as your account is approved.
             Thank you for your patience.
           </p>
         </CardContent>
@@ -44,10 +44,10 @@ export default async function CreateChatbotPage() {
       <Card>
         <CardHeader>
           <CardTitle>Upgrade Required</CardTitle>
-          <CardDescription>You need an active subscription to create additional chatbots.</CardDescription>
+          <CardDescription>You need an active subscription to create additional agents.</CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="mb-4">The free plan allows you to create 1 chatbot. Please upgrade to create more.</p>
+          <p className="mb-4">The free plan allows you to create 1 agent. Please upgrade to create more.</p>
           <Link href="/pricing">
             <Button>View Pricing Plans</Button>
           </Link>

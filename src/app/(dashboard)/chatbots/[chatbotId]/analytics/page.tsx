@@ -6,7 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MessageSquare, Users } from 'lucide-react';
 import { RecentConversations } from '@/components/dashboard/RecentConversations';
 
-export default async function AnalyticsPage({ params }: { params: { chatbotId: string } }) {
+export default async function AnalyticsPage({ 
+  params 
+}: { 
+  params: { chatbotId: string };
+}) {
   const { user } = await getSession();
   if (!user) redirect('/login');
 
@@ -45,7 +49,7 @@ export default async function AnalyticsPage({ params }: { params: { chatbotId: s
       <div>
         <h1 className="text-2xl font-bold">Analytics: {chatbot.name}</h1>
         <p className="text-sm text-muted-foreground">
-          An overview of your chatbot&apos;s performance.
+          An overview of your agent&apos;s performance.
         </p>
       </div>
 
@@ -60,11 +64,11 @@ export default async function AnalyticsPage({ params }: { params: { chatbotId: s
               {messagesError ? 'Error' : totalMessages ?? 0}
             </div>
             <p className="text-xs text-muted-foreground">
-              Total messages exchanged with this bot.
+              Total messages exchanged with this agent.
             </p>
             {totalMessages === 0 && (
               <p className="text-xs text-blue-600 mt-2">
-                💡 Have a test conversation with your bot to see messages appear here.
+                💡 Have a test conversation with your agent to see messages appear here.
               </p>
             )}
           </CardContent>

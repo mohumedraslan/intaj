@@ -51,7 +51,7 @@ export default function CreateChatbotForm({ userId }: { userId: string }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create a New AI Chatbot</CardTitle>
+        <CardTitle>Create a New AI Agent</CardTitle>
         <CardDescription>Define its name and core personality.</CardDescription>
       </CardHeader>
       <CardContent>
@@ -61,11 +61,11 @@ export default function CreateChatbotForm({ userId }: { userId: string }) {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Chatbot Name</FormLabel>
+                  <FormLabel>Agent Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., 'Support Bot for Nabih Tech'" {...field} />
+                    <Input placeholder="e.g., 'Support Agent for Nabih Tech'" {...field} />
                   </FormControl>
-                  <FormDescription>A public name for your chatbot.</FormDescription>
+                  <FormDescription>A public name for your agent.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -89,7 +89,7 @@ export default function CreateChatbotForm({ userId }: { userId: string }) {
             />
 
             <Button type="submit" disabled={isPending}>
-              {isPending ? "Creating..." : "Create Chatbot"}
+              {isPending ? "Creating..." : "Create Agent"}
             </Button>
           </form>
       </CardContent>

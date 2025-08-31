@@ -25,7 +25,7 @@ export function ConnectionList({ initialConnections }: ConnectionListProps) {
           You have not connected any platforms yet.
         </p>
         <p className="text-sm text-gray-500">
-          Platform integration will be available soon. This will allow you to connect your chatbots to WhatsApp, Facebook, Instagram, and your website.
+          Platform integration will be available soon. This will allow you to connect your agents to WhatsApp, Facebook, Instagram, and your website.
         </p>
       </div>
     );
@@ -109,7 +109,7 @@ export function ConnectionList({ initialConnections }: ConnectionListProps) {
                   className="text-xs"
                 >
                   <MessageSquare className="h-3 w-3 mr-1" />
-                  View Chatbots
+                  View Agents
                   <span className="text-xs text-gray-500 ml-1">(Soon)</span>
                 </Button>
                 <Button

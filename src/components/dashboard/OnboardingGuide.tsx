@@ -38,16 +38,16 @@ export function OnboardingGuide({ chatbotCount }: OnboardingGuideProps) {
               <Circle className="h-5 w-5 text-blue-600" />
             )}
             <div className="flex-1">
-              <h4 className="font-medium">Step 1: Create Your First Chatbot</h4>
-              <p className="text-sm text-gray-600">Give your chatbot a name and a personality.</p>
+              <h4 className="font-medium">Step 1: Create Your First Agent</h4>
+              <p className="text-sm text-gray-600">Give your agent a name and a personality.</p>
             </div>
             {!hasCreatedBot && (
-              <Link href="/chatbots/create">
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  Create Chatbot
-                </Button>
-              </Link>
+                        <Link href="/agents/create">
+            <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Create Agent
+            </Button>
+          </Link>
             )}
           </div>
 
@@ -62,7 +62,7 @@ export function OnboardingGuide({ chatbotCount }: OnboardingGuideProps) {
           <div className="flex items-center gap-3">
             <Circle className="h-5 w-5 text-gray-400" />
             <div className="flex-1">
-              <h4 className="font-medium text-gray-500">Step 3: Test Your Chatbot</h4>
+              <h4 className="font-medium text-gray-500">Step 3: Test Your Agent</h4>
               <p className="text-sm text-gray-500">Have a conversation and see how it responds.</p>
             </div>
           </div>

@@ -12,8 +12,13 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
+import { assignChatbotToConnection, updateChatbotModel } from '@/app/(dashboard)/actions'
 
-export default async function ManageChatbotPage({ params }: { params: { chatbotId: string } }) {
+export default async function ManageChatbotPage({ 
+  params 
+}: { 
+  params: { chatbotId: string };
+}) {
   const { user } = await getSession()
   if (!user) redirect('/login')
 
@@ -64,7 +69,7 @@ export default async function ManageChatbotPage({ params }: { params: { chatbotI
         <div>
           <h1 className="text-2xl font-bold">Manage: {chatbot.name}</h1>
           <p className="text-sm text-muted-foreground">
-            Add knowledge to your chatbot by uploading files or adding FAQs.
+            Add knowledge to your agent by uploading files or adding FAQs.
           </p>
         </div>
         <Link href={`/chatbots/${chatbot.id}/analytics`}>
@@ -83,11 +88,11 @@ export default async function ManageChatbotPage({ params }: { params: { chatbotI
             Assign to Platform
           </CardTitle>
           <CardDescription>
-            Connect this chatbot to one of your platforms to make it live.
+            Connect this agent to one of your platforms to make it live.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action="/api/assign-connection" method="POST" className="space-y-4">
+          <form action={assignChatbotToConnection} className="space-y-4">
             <input type="hidden" name="chatbotId" value={chatbot.id} />
             <div className="space-y-2">
               <Label htmlFor="connection">Select a Connection</Label>
@@ -124,7 +129,7 @@ export default async function ManageChatbotPage({ params }: { params: { chatbotI
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action="/api/update-model" method="POST" className="space-y-4">
+          <form action={updateChatbotModel} className="space-y-4">
             <input type="hidden" name="chatbotId" value={chatbot.id} />
             <div className="space-y-2">
               <Label htmlFor="model">Select a Model</Label>

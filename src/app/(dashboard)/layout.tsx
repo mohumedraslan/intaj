@@ -1,7 +1,7 @@
 // src/app/(dashboard)/layout.tsx
 import { getSession } from '@/app/auth/actions'
 import { redirect } from 'next/navigation'
-import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
+import { Sidebar } from '@/components/dashboard/Sidebar'
 
 export default async function DashboardLayout({
   children,
@@ -14,9 +14,9 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen">
-      <DashboardHeader user={user} />
-      <main className="mx-auto max-w-6xl p-6">
+    <div className="flex h-screen">
+      <Sidebar />
+      <main className="flex-1 overflow-y-auto bg-bg">
         {children}
       </main>
     </div>

@@ -206,6 +206,12 @@ export async function deleteFaq(values: { faqId: string }) {
 // --- STRIPE CHECKOUT & PORTAL ACTIONS ---
 export async function createCheckoutSession(formData: FormData) {
   const priceId = formData.get('priceId') as string
+  
+  // Validate price ID to prevent Stripe errors
+  if (!priceId || priceId.startsWith('price_')) {
+    throw new Error('Invalid Price ID configuration.')
+  }
+  
   const supabase = await createClient()
   const {
     data: { user },
@@ -307,7 +313,6 @@ export async function assignChatbotToConnection(formData: FormData) {
     .eq('id', chatbotId);
   
   revalidatePath(`/chatbots/${chatbotId}/manage`);
-  return { success: true };
 }
 
 export async function updateChatbotModel(formData: FormData) {
@@ -321,5 +326,80 @@ export async function updateChatbotModel(formData: FormData) {
     .eq('id', chatbotId);
   
   revalidatePath(`/chatbots/${chatbotId}/manage`);
-  return { success: true };
+}
+
+// --- NEW: FACEBOOK OAUTH ACTION ---
+export async function initiateFacebookOAuth() {
+  const clientId = process.env.FACEBOOK_APP_ID;
+  const redirectUri = `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback/facebook`;
+  const scope = 'pages_show_list,pages_messaging,instagram_basic,instagram_manage_messages';
+  
+  if (!clientId) {
+    throw new Error('Facebook App ID is not configured.');
+  }
+  
+  const authUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=code`;
+  
+  redirect(authUrl);
+}
+
+// --- DASHBOARD DEMO AGENT ACTION ---
+export async function getDashboardDemoResponse(values: { history: Message[] }) {
+  if (!process.env.OPENROUTER_API_KEY) {
+    return { response: "Sorry, our demo is currently offline. Please try again later." };
+  }
+
+  const openrouter = new OpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: process.env.OPENROUTER_API_KEY,
+    defaultHeaders: {
+      "HTTP-Referer": process.env.NEXT_PUBLIC_SITE_URL,
+      "X-Title": "Intaj AI",
+    },
+  });
+
+  const demoBotPrompt = `You are a helpful and enthusiastic AI assistant for Intaj, an AI chatbot platform. Your goal is to guide new users and answer questions about the platform.
+
+Key points about Intaj:
+- It's an AI chatbot platform that allows users to create custom AI agents
+- Users can train chatbots on their own data by uploading files or adding FAQs
+- It supports multiple AI models including free options
+- Users can connect chatbots to platforms like WhatsApp, Facebook, Instagram, and websites
+- There's a free tier to get started
+
+Keep your answers concise, friendly, and always helpful. Guide users toward creating their first chatbot or exploring the platform features.`;
+
+  try {
+    const response = await openrouter.chat.completions.create({
+      model: process.env.OPENROUTER_MODEL || 'mistralai/mistral-7b-instruct:free',
+      messages: [
+        { role: 'system', content: demoBotPrompt },
+        ...values.history
+      ],
+      temperature: 0.7,
+      max_tokens: 200,
+    });
+
+    return { response: response.choices[0]?.message?.content || "Sorry, I couldn't generate a response." };
+  } catch (error) {
+    console.error("Dashboard Demo AI Error:", error);
+    return { response: "Sorry, I encountered an error. Please try asking something else." };
+  }
+}
+
+// --- DATA EXPORT ACTION ---
+export async function requestDataExport() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  if (!user) {
+    console.error('Unauthorized data export request');
+    return;
+  }
+  
+  console.log(`Data export requested for user: ${user.id}`);
+  // In a real app, you would trigger a background job or send an email to your admin team here.
+  // For now, we can just log the request.
+  
+  revalidatePath('/profile');
 }

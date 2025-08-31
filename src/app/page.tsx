@@ -45,54 +45,54 @@ const useCases = [
 
 export default function HighConversionPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-2">
-              <MessageSquare className="h-8 w-8 text-blue-600" />
-              <span className="text-xl font-bold text-gray-900">Intaj AI</span>
+    <div className="min-h-screen bg-background">
+                {/* Header */}
+          <header className="bg-card border-b border-border sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between items-center py-4">
+                <div className="flex items-center space-x-2">
+                  <MessageSquare className="h-8 w-8 text-primary" />
+                  <span className="text-xl font-bold text-foreground">Intaj AI</span>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <Link href="/pricing">
+                    <Button variant="ghost">Pricing</Button>
+                  </Link>
+                  <Link href="/login">
+                    <Button>Sign In</Button>
+                  </Link>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <Link href="/pricing">
-                <Button variant="ghost">Pricing</Button>
-              </Link>
-              <Link href="/login">
-                <Button>Sign In</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+          </header>
 
-      {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-100">
+                {/* Hero Section */}
+          <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-card to-muted">
         <div className="max-w-7xl mx-auto text-center">
           <div className="max-w-4xl mx-auto space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Smart Automation Solutions for Businesses in Egypt
-              </h1>
-              <p className="text-xl lg:text-2xl text-gray-600 leading-relaxed">
-                Stop Losing Customers. Start Automating Conversations.
-              </p>
-              <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-                Companies lose over 40% of their customers due to slow response times. Intaj provides AI agents that engage every customer instantly, turning queries into conversions.
-              </p>
-            </div>
+                            <div className="space-y-4">
+                  <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
+                    Smart Automation Solutions for Businesses in Egypt
+                  </h1>
+                  <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed">
+                    Stop Losing Customers. Start Automating Conversations.
+                  </p>
+                  <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                    Companies lose over 40% of their customers due to slow response times. Intaj provides AI agents that engage every customer instantly, turning queries into conversions.
+                  </p>
+                </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/login">
-                <Button size="lg" className="w-full sm:w-auto text-lg px-8 py-4">
-                  Get Started for Free
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-4">
-                  Book a Free Demo
-                </Button>
-              </Link>
+                                <Link href="/signup">
+                    <Button size="lg" className="w-full sm:w-auto text-lg px-8 py-4">
+                      Get Started for Free
+                    </Button>
+                  </Link>
+                  <Link href="/signup">
+                    <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-4">
+                      Book a Free Demo
+                    </Button>
+                  </Link>
             </div>
           </div>
         </div>
@@ -101,14 +101,14 @@ export default function HighConversionPage() {
       {/* Features/Benefits Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-              The All-in-One AI Platform for Business Growth
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Go beyond simple chatbots. Build powerful AI agents for every part of your business.
-            </p>
-          </div>
+                        <div className="text-center space-y-4 mb-16">
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
+                  The All-in-One AI Platform for Business Growth
+                </h2>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                  Go beyond simple chatbots. Build powerful AI agents for every part of your business.
+                </p>
+              </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
@@ -208,12 +208,12 @@ export default function HighConversionPage() {
             Create your first AI agent in under 5 minutes. No credit card required.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/login">
-              <Button size="lg" variant="secondary" className="w-full sm:w-auto text-lg px-8 py-4 group">
-                Start Your Free Trial Now
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+                            <Link href="/signup">
+                  <Button size="lg" variant="secondary" className="w-full sm:w-auto text-lg px-8 py-4 group">
+                    Start Your Free Trial Now
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
           </div>
           <p className="text-blue-200 text-sm">
             ✓ Free forever plan • ✓ No setup fees • ✓ Cancel anytime
