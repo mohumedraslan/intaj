@@ -36,7 +36,7 @@ export default async function WorkflowsPage() {
             </div>
             <h3 className="text-lg font-semibold text-text">Workflow Automation</h3>
             <p className="text-muted max-w-md mx-auto">
-              Soon you'll be able to create complex AI-powered workflows that automate your business processes, 
+              Soon you&apos;ll be able to create complex AI-powered workflows that automate your business processes,
               from lead qualification to customer support escalations.
             </p>
             <div className="flex items-center justify-center gap-2 text-sm text-muted">

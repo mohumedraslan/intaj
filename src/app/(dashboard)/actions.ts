@@ -1,3 +1,12 @@
+"use server"
+
+import { revalidatePath } from 'next/cache'
+import { createClient } from '@/lib/supabase/server'
+import OpenAI from 'openai'
+import Stripe from 'stripe'
+import { type Message } from '@/lib/types'
+import { redirect } from 'next/navigation'
+
 // --- HUMAN HANDOFF: SEND HUMAN REPLY ---
 export async function sendHumanReply(formData: FormData) {
   const conversationId = formData.get('conversationId') as string;
@@ -38,14 +47,7 @@ export async function sendHumanReply(formData: FormData) {
   revalidatePath('/inbox');
   return { success: true };
 }
-"use server"
 
-import { revalidatePath } from 'next/cache'
-import { createClient } from '@/lib/supabase/server'
-import OpenAI from 'openai'
-import Stripe from 'stripe'
-import { type Message } from '@/lib/types'
-import { redirect } from 'next/navigation'
 
 // --- REAL CREATE-CHATBOT IMPLEMENTATION ---
 export async function createChatbot(values: {
@@ -129,7 +131,8 @@ export async function getAiResponse(values: {
     .from('faqs')
     .select('answer')
     .eq('chatbot_id', chatbotId)
-    .textSearch('question', lastUserMessage.content, { type: 'websearch', config: 'english' } as { type: 'websearch'; config: string })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .textSearch('question', lastUserMessage.content, { type: 'websearch', config: 'english' } as any)
 
   if (matchedFaqs && matchedFaqs.length > 0) {
     // If we find a direct FAQ match, return the first answer.
@@ -247,8 +250,7 @@ export async function deleteFaq(values: { faqId: string }) {
 export async function createCheckoutSession(formData: FormData) {
   const priceId = formData.get('priceId') as string
   
-  // Validate price ID to prevent Stripe errors
-  if (!priceId || priceId.startsWith('price_')) {
+  if (!priceId || !priceId.startsWith('price_')) {
     throw new Error('Invalid Price ID configuration.')
   }
   
@@ -260,7 +262,6 @@ export async function createCheckoutSession(formData: FormData) {
     return redirect('/login')
   }
 
-  // Check if user is already a Stripe customer in our DB
   const { data: profile } = await supabase
     .from('profiles')
     .select('stripe_customer_id')
@@ -269,7 +270,6 @@ export async function createCheckoutSession(formData: FormData) {
 
   let customerId = profile?.stripe_customer_id as string | undefined
 
-  // If not a customer, create one in Stripe
   if (!customerId) {
     const customer = await stripe.customers.create({ email: user.email || undefined })
     customerId = customer.id
@@ -326,13 +326,11 @@ export async function submitMessageFeedback(values: { messageId: string; feedbac
     return { error: 'Unauthorized' };
   }
   
-  // We need to ensure the user owns the message they are giving feedback on.
-  // This is a simplified check. A full check would join through the chatbots table.
   const { error } = await supabase
     .from('messages')
     .update({ feedback })
     .eq('id', messageId)
-    .eq('user_id', user.id); // RLS also protects this, but an explicit check is good.
+    .eq('user_id', user.id);
   
   if (error) {
     return { error: error.message };
@@ -438,8 +436,6 @@ export async function requestDataExport() {
   }
   
   console.log(`Data export requested for user: ${user.id}`);
-  // In a real app, you would trigger a background job or send an email to your admin team here.
-  // For now, we can just log the request.
   
   revalidatePath('/profile');
 }
@@ -484,14 +480,14 @@ export async function postCustomRequest(values: {
   platforms: string[];
   budget: string;
 }) {
-  console.log("New custom request received:", values);
-  // In a real application, this would:
-  // 1. Save the request to your own database.
-  // 2. Post the request to the rabt.nabih.tech API.
-  // For now, we just log it to the console and return success.
-
-  // Simulate a short delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-
-  return { success: true };
+  try {
+    console.log("New custom request received:", values);
+    // In a real application, this would post to a webhook or API endpoint.
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    return { success: true, error: null };
+  } catch (e) {
+    console.error("Custom request submission failed:", e);
+    const errorMessage = e instanceof Error ? e.message : "An unknown error occurred.";
+    return { success: false, error: errorMessage };
+  }
 }
