@@ -114,12 +114,12 @@ async function DashboardContent() {
               </div>
               <h3 className="text-lg font-semibold text-foreground">No agents yet</h3>
               <p className="text-muted-foreground max-w-md mx-auto">
-                Create your first AI agent to start building intelligent conversations and providing value to your users.
+                Get started by choosing a pre-built template or build your own from scratch.
               </p>
-              <Link href="/agents/create">
+              <Link href="/agents/templates">
                 <Button className="mt-4">
                   <PlusCircle className="mr-2 h-4 w-4" />
-                  Create Your First AI Agent
+                  Browse Templates
                 </Button>
               </Link>
             </div>

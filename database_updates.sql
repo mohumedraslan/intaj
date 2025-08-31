@@ -59,3 +59,33 @@ ALTER TABLE public.connections ENABLE ROW LEVEL SECURITY;
 
 -- Create RLS policies for connections
 CREATE POLICY "Allow users to manage their own connections" ON public.connections FOR ALL USING (auth.uid() = user_id);
+
+
+-- CONVERSATIONS & INBOX SCHEMA --
+
+-- Add a conversation_id to group messages
+ALTER TABLE public.messages ADD COLUMN IF NOT EXISTS conversation_id UUID;
+
+-- Create a new table to manage conversations
+CREATE TABLE IF NOT EXISTS public.conversations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  agent_id UUID NOT NULL REFERENCES public.agents(id) ON DELETE CASCADE,
+  connection_id UUID REFERENCES public.connections(id) ON DELETE SET NULL,
+  status TEXT DEFAULT 'active', -- e.g., 'active', 'resolved', 'handoff'
+  last_message_at TIMESTAMPTZ DEFAULT now(),
+  customer_identifier TEXT -- e.g., phone number, user ID
+);
+
+-- Add RLS policies for conversations
+ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow users to manage their own conversations" ON public.conversations;
+CREATE POLICY "Allow users to manage their own conversations"
+  ON public.conversations FOR ALL
+  USING (auth.uid() = user_id);
+
+-- Update the messages table to link to conversations
+ALTER TABLE public.messages
+  DROP CONSTRAINT IF EXISTS messages_conversation_id_fkey,
+  ADD CONSTRAINT messages_conversation_id_fkey
+  FOREIGN KEY (conversation_id) REFERENCES public.conversations(id) ON DELETE CASCADE;
