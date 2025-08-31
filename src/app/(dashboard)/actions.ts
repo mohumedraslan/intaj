@@ -1,3 +1,25 @@
+// --- HUMAN HANDOFF: SEND HUMAN REPLY ---
+export async function sendHumanReply({ conversationId, content }: { conversationId: string; content: string }) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return { error: 'Unauthorized' };
+  }
+  // Insert message as 'user' (business owner/agent)
+  const { error } = await supabase.from('messages').insert({
+    conversation_id: conversationId,
+    user_id: user.id,
+    role: 'user',
+    content,
+  });
+  // TODO: Send message via platform API
+  // e.g., await sendToPlatform(conversationId, content);
+  revalidatePath('/inbox');
+  if (error) {
+    return { error: error.message };
+  }
+  return { success: true };
+}
 "use server"
 
 import { revalidatePath } from 'next/cache'

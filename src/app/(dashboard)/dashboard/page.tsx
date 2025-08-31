@@ -51,24 +51,21 @@ async function DashboardContent() {
       
       <div className="flex items-center justify-between">
         <div>
-                  <h1 className="text-2xl font-bold">My Agents</h1>
-        <p className="text-sm text-muted-foreground">Your AI Assistants</p>
+          <h1 className="text-2xl font-bold">My Agents</h1>
+          <p className="text-sm text-muted-foreground">Your AI Assistants</p>
         </div>
-        {/* Only show the create button here if they are past the onboarding */}
-        {(chatbots?.length ?? 0) > 0 && (
-          <div className="flex gap-3">
-            <Link href="/agents/create">
-              <Button>
-                <PlusCircle className="mr-2 h-4 w-4" />
-                Create New Agent
-              </Button>
-            </Link>
-            <Button variant="outline" disabled>
+        <div className="flex gap-3">
+          <Link href="/agents/templates">
+            <Button>
               <PlusCircle className="mr-2 h-4 w-4" />
-              Create New Automation (Coming Soon)
+              Browse Templates
             </Button>
-          </div>
-        )}
+          </Link>
+          <Button variant="outline" disabled>
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Create New Automation (Coming Soon)
+          </Button>
+        </div>
       </div>
 
       <Card>

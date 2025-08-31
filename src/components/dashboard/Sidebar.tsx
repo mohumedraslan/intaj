@@ -2,12 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Bot, Plug, HelpCircle, User, BarChart, LifeBuoy, LogOut } from 'lucide-react';
+import { Home, Bot, Plug, HelpCircle, User, BarChart, LifeBuoy, LogOut, MessageSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
   { href: '/dashboard', icon: Home, label: 'Dashboard' },
   { href: '/agents', icon: Bot, label: 'My Agents' },
+  { href: '/agents/templates', icon: Bot, label: 'Templates', sub: true },
+  { href: '/inbox', icon: MessageSquare, label: 'Inbox' },
   { href: '/connections', icon: Plug, label: 'Connections' },
   { href: '/analytics', icon: BarChart, label: 'Analytics' },
   { href: '/profile', icon: User, label: 'Profile' },
@@ -33,25 +35,41 @@ export function Sidebar() {
       {/* Navigation */}
       <nav className="flex-1 space-y-1 p-4">
         {navItems.map(item => (
-          <Link
-            key={item.href}
-            href={item.disabled ? '#' : item.href}
-            className={cn(
-              "flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-              item.disabled
-                ? "text-muted/50 cursor-not-allowed"
-                : pathname === item.href
-                ? "bg-brand-500 text-white"
-                : "text-muted hover:bg-accent hover:text-text"
-            )}
-            onClick={item.disabled ? (e) => e.preventDefault() : undefined}
-          >
-            <item.icon className="h-5 w-5" />
-            <span>{item.label}</span>
-            {item.disabled && (
-              <span className="ml-auto text-xs bg-muted px-2 py-1 rounded text-text">Soon</span>
-            )}
-          </Link>
+          item.sub ? (
+            <div key={item.href} className="ml-6">
+              <Link
+                href={item.href}
+                className={cn(
+                  "flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  pathname === item.href
+                    ? "bg-brand-500 text-white"
+                    : "text-muted hover:bg-accent hover:text-text"
+                )}
+              >
+                <span>{item.label}</span>
+              </Link>
+            </div>
+          ) : (
+            <Link
+              key={item.href}
+              href={item.disabled ? '#' : item.href}
+              className={cn(
+                "flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                item.disabled
+                  ? "text-muted/50 cursor-not-allowed"
+                  : pathname === item.href
+                  ? "bg-brand-500 text-white"
+                  : "text-muted hover:bg-accent hover:text-text"
+              )}
+              onClick={item.disabled ? (e) => e.preventDefault() : undefined}
+            >
+              <item.icon className="h-5 w-5" />
+              <span>{item.label}</span>
+              {item.disabled && (
+                <span className="ml-auto text-xs bg-muted px-2 py-1 rounded text-text">Soon</span>
+              )}
+            </Link>
+          )
         ))}
       </nav>
 
