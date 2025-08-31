@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { getSession } from '@/app/auth/actions';
 import { redirect } from 'next/navigation';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Send } from 'lucide-react';

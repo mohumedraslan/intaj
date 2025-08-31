@@ -48,7 +48,7 @@ async function AgentsList() {
 
       {agents && agents.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {agents.map((agent: any) => (
+          {agents.map((agent: { id: string, name: string, category: string, created_at: string }) => (
             <Card key={agent.id} className="flex flex-col">
               <CardHeader>
                 <div className="flex justify-between items-start">
@@ -85,7 +85,7 @@ async function AgentsList() {
           <div className="mx-auto w-24 h-24 bg-muted rounded-full flex items-center justify-center">
             <Bot className="w-12 h-12 text-muted-foreground" />
           </div>
-          <h3 className="text-xl font-semibold text-foreground">You haven't created any agents yet.</h3>
+          <h3 className="text-xl font-semibold text-foreground">You haven&apos;t created any agents yet.</h3>
           <p className="text-muted-foreground max-w-md mx-auto">
             Agents are AI assistants you can train on your data. Get started by choosing a category.
           </p>
