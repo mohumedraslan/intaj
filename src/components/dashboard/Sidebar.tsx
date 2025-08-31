@@ -6,9 +6,9 @@ import { Home, Bot, Plug, HelpCircle, User, BarChart, LifeBuoy, LogOut, MessageS
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { href: '/dashboard', icon: Home, label: 'Dashboard' },
   { href: '/agents', icon: Bot, label: 'My Agents' },
   { href: '/agents/templates', icon: Bot, label: 'Templates', sub: true },
+  { href: '/dashboard', icon: Home, label: 'Dashboard' },
   { href: '/inbox', icon: MessageSquare, label: 'Inbox' },
   { href: '/connections', icon: Plug, label: 'Connections' },
   { href: '/analytics', icon: BarChart, label: 'Analytics' },

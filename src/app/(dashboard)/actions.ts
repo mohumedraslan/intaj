@@ -1,23 +1,41 @@
 // --- HUMAN HANDOFF: SEND HUMAN REPLY ---
-export async function sendHumanReply({ conversationId, content }: { conversationId: string; content: string }) {
+export async function sendHumanReply(formData: FormData) {
+  const conversationId = formData.get('conversationId') as string;
+  const content = formData.get('content') as string;
+
+  if (!conversationId || !content.trim()) {
+    return { error: 'Message content cannot be empty.' };
+  }
+
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
     return { error: 'Unauthorized' };
   }
-  // Insert message as 'user' (business owner/agent)
+
+  // Insert message as 'user' (representing the business owner/agent)
   const { error } = await supabase.from('messages').insert({
     conversation_id: conversationId,
     user_id: user.id,
     role: 'user',
-    content,
+    content: content.trim(),
   });
-  // TODO: Send message via platform API
-  // e.g., await sendToPlatform(conversationId, content);
-  revalidatePath('/inbox');
+
   if (error) {
+    console.error("Error sending reply:", error);
     return { error: error.message };
   }
+
+  // Also update the conversation's last_message_at timestamp
+  await supabase
+    .from('conversations')
+    .update({ last_message_at: new Date().toISOString() })
+    .eq('id', conversationId);
+
+  // TODO: Send message via platform API
+  // e.g., await sendToPlatform(conversationId, content);
+
+  revalidatePath('/inbox');
   return { success: true };
 }
 "use server"
@@ -424,4 +442,36 @@ export async function requestDataExport() {
   // For now, we can just log the request.
   
   revalidatePath('/profile');
+}
+
+export async function createAgent(values: {
+  name: string;
+  initial_prompt: string;
+}) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "You must be logged in to create an agent." };
+  }
+
+  const { data, error } = await supabase
+    .from("agents")
+    .insert([
+      {
+        name: values.name,
+        initial_prompt: values.initial_prompt,
+        user_id: user.id,
+      },
+    ])
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Error creating agent:", error);
+    return { error: error.message };
+  }
+
+  revalidatePath("/agents");
+  return { data };
 }
