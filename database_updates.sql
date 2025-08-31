@@ -89,3 +89,17 @@ ALTER TABLE public.messages
   DROP CONSTRAINT IF EXISTS messages_conversation_id_fkey,
   ADD CONSTRAINT messages_conversation_id_fkey
   FOREIGN KEY (conversation_id) REFERENCES public.conversations(id) ON DELETE CASCADE;
+
+
+-- AGENT CATEGORIES SCHEMA --
+
+-- Create a new ENUM type for agent categories
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'agent_category') THEN
+    CREATE TYPE public.agent_category AS ENUM ('Support', 'Sales', 'Marketing', 'Content');
+  END IF;
+END$$;
+
+-- Add the category column to the agents table
+ALTER TABLE public.agents ADD COLUMN IF NOT EXISTS category public.agent_category DEFAULT 'Support';

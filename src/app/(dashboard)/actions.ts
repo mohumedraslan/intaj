@@ -447,6 +447,7 @@ export async function requestDataExport() {
 export async function createAgent(values: {
   name: string;
   initial_prompt: string;
+  category: string;
 }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -461,6 +462,7 @@ export async function createAgent(values: {
       {
         name: values.name,
         initial_prompt: values.initial_prompt,
+        category: values.category,
         user_id: user.id,
       },
     ])
@@ -474,4 +476,22 @@ export async function createAgent(values: {
 
   revalidatePath("/agents");
   return { data };
+}
+
+export async function postCustomRequest(values: {
+  title: string;
+  description: string;
+  platforms: string[];
+  budget: string;
+}) {
+  console.log("New custom request received:", values);
+  // In a real application, this would:
+  // 1. Save the request to your own database.
+  // 2. Post the request to the rabt.nabih.tech API.
+  // For now, we just log it to the console and return success.
+
+  // Simulate a short delay
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
+  return { success: true };
 }
