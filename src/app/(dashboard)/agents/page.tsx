@@ -5,8 +5,18 @@ import { createClient } from '@/lib/supabase/server';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { PlusCircle, MessageSquare, Settings, BarChart, Bot } from 'lucide-react';
+import { PlusCircle, MessageSquare, Settings, Bot } from 'lucide-react';
 import { DashboardSkeleton } from '@/components/dashboard/DashboardSkeleton';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
+
+const categoryColors: { [key: string]: string } = {
+  Support: 'bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200',
+  Sales: 'bg-green-100 text-green-800 border-green-200 hover:bg-green-200',
+  Marketing: 'bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-200',
+  Content: 'bg-orange-100 text-orange-800 border-orange-200 hover:bg-orange-200',
+  Default: 'bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200',
+};
 
 async function AgentsList() {
   const { user } = await getSession();
@@ -15,8 +25,6 @@ async function AgentsList() {
   }
 
   const supabase = await createClient();
-  // Note: The prompt implies an 'agents' table.
-  // The existing dashboard used 'chatbots'. We will use 'agents' here as per the new requirements.
   const { data: agents, error } = await supabase
     .from('agents')
     .select('*')
@@ -28,10 +36,10 @@ async function AgentsList() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-3xl font-bold">My Agents</h1>
-          <p className="text-muted-foreground">Your collection of AI assistants.</p>
+          <p className="text-muted-foreground">Your collection of AI assistants, organized by category.</p>
         </div>
-        <Link href="/agents/templates">
-          <Button>
+        <Link href="/agents/create">
+          <Button size="lg">
             <PlusCircle className="mr-2 h-4 w-4" />
             Create New Agent
           </Button>
@@ -39,33 +47,35 @@ async function AgentsList() {
       </div>
 
       {agents && agents.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {agents.map((agent: any) => (
-            <Card key={agent.id}>
+            <Card key={agent.id} className="flex flex-col">
               <CardHeader>
-                <div className="flex items-center gap-3">
-                  <Bot className="w-6 h-6 text-muted-foreground" />
-                  <div className="flex-1">
+                <div className="flex justify-between items-start">
                     <CardTitle className="text-lg">{agent.name}</CardTitle>
-                    <CardDescription>
-                      Created on: {new Date(agent.created_at).toLocaleDateString()}
-                    </CardDescription>
-                  </div>
+                    <Badge className={cn(categoryColors[agent.category] || categoryColors.Default)}>
+                        {agent.category || 'General'}
+                    </Badge>
                 </div>
+                <CardDescription>
+                  Created on: {new Date(agent.created_at).toLocaleDateString()}
+                </CardDescription>
               </CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
-                 <Link href={`/agents/${agent.id}/chat`} className="flex-1">
-                    <Button variant="secondary" size="sm" className="w-full">
-                      <MessageSquare className="mr-2 h-4 w-4" />
-                      Chat
-                    </Button>
-                  </Link>
-                  <Link href={`/agents/${agent.id}/manage`} className="flex-1">
-                    <Button variant="outline" size="sm" className="w-full">
-                      <Settings className="mr-2 h-4 w-4" />
-                      Manage
-                    </Button>
-                  </Link>
+              <CardContent className="flex-grow flex flex-col justify-end">
+                <div className="flex flex-wrap gap-2">
+                   <Link href={`/agents/${agent.id}/chat`} className="flex-1">
+                      <Button variant="secondary" size="sm" className="w-full">
+                        <MessageSquare className="mr-2 h-4 w-4" />
+                        Chat
+                      </Button>
+                    </Link>
+                    <Link href={`/agents/${agent.id}/manage`} className="flex-1">
+                      <Button variant="outline" size="sm" className="w-full">
+                        <Settings className="mr-2 h-4 w-4" />
+                        Manage
+                      </Button>
+                    </Link>
+                </div>
               </CardContent>
             </Card>
           ))}
@@ -77,12 +87,12 @@ async function AgentsList() {
           </div>
           <h3 className="text-xl font-semibold text-foreground">You haven't created any agents yet.</h3>
           <p className="text-muted-foreground max-w-md mx-auto">
-            Agents are AI assistants you can train on your data. Get started by choosing a template.
+            Agents are AI assistants you can train on your data. Get started by choosing a category.
           </p>
-          <Link href="/agents/templates">
+          <Link href="/agents/create">
             <Button className="mt-4" size="lg">
               <PlusCircle className="mr-2 h-4 w-4" />
-              Browse Templates
+              Create Your First Agent
             </Button>
           </Link>
         </div>
