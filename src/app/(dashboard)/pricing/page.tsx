@@ -73,11 +73,9 @@ export default function PricingPage() {
               ) : tier.priceId ? (
                 <form action={async (formData) => {
                   'use server';
-                  const result = await createCheckoutSession(formData);
-                  if (result?.error) {
-                    // Handle error - you could add toast notification here
-                    console.error(result.error);
-                  }
+                  await createCheckoutSession(formData);
+                  // The checkout session will redirect, so no error handling is needed here
+                  // on the client side. Errors will be handled by Next.js if the redirect fails.
                 }} className="w-full">
                   <input type="hidden" name="priceId" value={tier.priceId} />
                   <Button type="submit" className="w-full">Subscribe</Button>
