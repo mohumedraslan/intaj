@@ -11,7 +11,7 @@ export async function ConversationList({ selectedConversationId }: { selectedCon
     return redirect('/login');
   }
 
-  const supabase = await createClient();
+  const supabase = createClient();
   const { data: conversations, error } = await supabase
     .from('conversations')
     .select(`
