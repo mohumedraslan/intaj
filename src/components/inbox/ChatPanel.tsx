@@ -9,7 +9,7 @@ import { sendHumanReply } from '@/app/(dashboard)/actions';
 import { cn } from '@/lib/utils';
 
 async function getConversationDetails(conversationId: string, userId: string) {
-  const supabase = await createClient();
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('conversations')
     .select(`

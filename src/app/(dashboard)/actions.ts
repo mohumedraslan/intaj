@@ -13,15 +13,13 @@ export async function sendHumanReply(formData: FormData) {
   const content = formData.get('content') as string;
 
   if (!conversationId || !content.trim()) {
-    console.error('Message content cannot be empty.');
-    return;
+    return { error: 'Message content cannot be empty.' };
   }
 
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
-    console.error('Unauthorized attempt to send reply.');
-    return;
+    return { error: 'Unauthorized' };
   }
 
   // Insert message as 'user' (representing the business owner/agent)
@@ -34,19 +32,20 @@ export async function sendHumanReply(formData: FormData) {
 
   if (error) {
     console.error("Error sending reply:", error);
-    // In a real app, you might want to handle this more gracefully
-  } else {
-    // Also update the conversation's last_message_at timestamp on success
-    await supabase
-      .from('conversations')
-      .update({ last_message_at: new Date().toISOString() })
-      .eq('id', conversationId);
+    return { error: error.message };
   }
+
+  // Also update the conversation's last_message_at timestamp
+  await supabase
+    .from('conversations')
+    .update({ last_message_at: new Date().toISOString() })
+    .eq('id', conversationId);
 
   // TODO: Send message via platform API
   // e.g., await sendToPlatform(conversationId, content);
 
   revalidatePath('/inbox');
+  return { success: true };
 }
 
 
