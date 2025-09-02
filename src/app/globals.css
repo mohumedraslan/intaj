@@ -3,52 +3,31 @@
 
 @layer base {
   :root {
-    /* New High-Contrast Dark Theme */
-    --brand-500: 214 100% 59%; /* #2A6EE8 - Vibrant Blue */
-    --bg: 220 13% 8%; /* #0D1117 - Deepest Dark for background */
-    --card-bg: 220 13% 11%; /* #161B22 - Lighter charcoal for cards/panels */
-    --text: 210 40% 98%; /* #F0F6FC - Light gray/white for text */
-    --muted: 220 13% 60%; /* #8B949E - Muted gray for secondary text */
-    --accent: 195 100% 50%; /* #30B0C8 - Vibrant Cyan for CTAs */
-    --border: 220 13% 20%; /* #30363D - Subtle borders */
-    --input: 220 13% 15%; /* #21262D - Input backgrounds */
-    --ring: 214 100% 59%; /* #2A6EE8 - Focus rings */
-    --radius: 0.5rem;
-    
-    /* Legacy compatibility */
-    --background: 220 13% 8%;
-    --foreground: 210 40% 98%;
-    --card: 220 13% 11%;
-    --card-foreground: 210 40% 98%;
-    --popover: 220 13% 11%;
-    --popover-foreground: 210 40% 98%;
+    /* Light Theme (Placeholder) */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
     --primary: 214 100% 59%;
-    --primary-foreground: 220 13% 8%;
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 220 13% 15%;
-    --muted-foreground: 220 13% 60%;
-    --accent: 220 13% 15%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 84% 60%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --input: 220 13% 15%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 214 100% 59%;
+    --radius: 0.5rem;
   }
 
   .dark {
-    /* New High-Contrast Dark Theme */
-    --brand-500: 214 100% 59%; /* #2A6EE8 - Vibrant Blue */
-    --bg: 220 13% 8%; /* #0D1117 - Deepest Dark for background */
-    --card-bg: 220 13% 11%; /* #161B22 - Lighter charcoal for cards/panels */
-    --text: 210 40% 98%; /* #F0F6FC - Light gray/white for text */
-    --muted: 220 13% 60%; /* #8B949E - Muted gray for secondary text */
-    --accent: 195 100% 50%; /* #30B0C8 - Vibrant Cyan for CTAs */
-    --border: 220 13% 20%; /* #30363D - Subtle borders */
-    --input: 220 13% 15%; /* #21262D - Input backgrounds */
-    --ring: 214 100% 59%; /* #2A6EE8 - Focus rings */
-    --radius: 0.5rem;
-    
-    /* Legacy compatibility */
+    /* High-Contrast Dark Theme */
     --background: 220 13% 8%;
     --foreground: 210 40% 98%;
     --card: 220 13% 11%;
@@ -56,16 +35,18 @@
     --popover: 220 13% 11%;
     --popover-foreground: 210 40% 98%;
     --primary: 214 100% 59%;
-    --primary-foreground: 220 13% 8%;
+    --primary-foreground: 210 40% 98%;
     --secondary: 220 13% 15%;
     --secondary-foreground: 210 40% 98%;
     --muted: 220 13% 15%;
     --muted-foreground: 220 13% 60%;
-    --accent: 220 13% 15%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 84% 60%;
+    --accent: 195 100% 50%;
+    --accent-foreground: 220 13% 8%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
+    --border: 220 13% 20%;
     --input: 220 13% 15%;
+    --ring: 214 100% 59%;
   }
 }
 
@@ -94,7 +75,7 @@
 }
 
 body {
-  background: hsl(var(--bg));
-  color: hsl(var(--text));
-  font-family: 'Inter', 'Almarai', Arial, Helvetica, sans-serif;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
 }
