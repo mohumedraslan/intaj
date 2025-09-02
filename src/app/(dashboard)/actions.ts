@@ -7,6 +7,32 @@ import Stripe from 'stripe'
 import { type Message } from '@/lib/types'
 import { redirect } from 'next/navigation'
 
+// Helper function to initialize OpenRouter client
+function getOpenRouterClient() {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  if (!apiKey) {
+    throw new Error("OPENROUTER_API_KEY is not configured.");
+  }
+  return new OpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: apiKey,
+    defaultHeaders: {
+      "HTTP-Referer": process.env.NEXT_PUBLIC_SITE_URL,
+      "X-Title": "Intaj AI",
+    },
+  });
+}
+
+// Helper function to initialize Stripe client
+function getStripeClient() {
+  const key = process.env.STRIPE_API_KEY as string;
+  if (!key) {
+    throw new Error("STRIPE_API_KEY is not configured.");
+  }
+  return new Stripe(key);
+}
+
+
 // --- HUMAN HANDOFF: SEND HUMAN REPLY ---
 export async function sendHumanReply(formData: FormData) {
   const conversationId = formData.get('conversationId') as string;
@@ -84,17 +110,6 @@ export async function createChatbot(values: {
   return { success: true }
 }
 
-// --- NEW: OpenRouter Client Initialization ---
-const openrouter = new OpenAI({
-  baseURL: "https://openrouter.ai/api/v1",
-  apiKey: process.env.OPENROUTER_API_KEY,
-  defaultHeaders: {
-    "HTTP-Referer": process.env.NEXT_PUBLIC_SITE_URL, // Required for free models
-    "X-Title": "Intaj AI", // Optional: Your app name
-  },
-})
-const stripe = new Stripe(process.env.STRIPE_API_KEY as string)
-
 // --- REAL AI IMPLEMENTATION (RAG UPGRADE) ---
 export async function getAiResponse(values: {
   chatbotId: string;
@@ -154,6 +169,7 @@ export async function getAiResponse(values: {
 
   // --- GENERATION STEP ---
   try {
+    const openrouter = getOpenRouterClient();
     // Fetch the chatbot's specific model if it exists
     const { data: chatbot } = await supabase
       .from('chatbots')
@@ -270,6 +286,8 @@ export async function createCheckoutSession(formData: FormData) {
 
   let customerId = profile?.stripe_customer_id as string | undefined
 
+  const stripe = getStripeClient();
+
   if (!customerId) {
     const customer = await stripe.customers.create({ email: user.email || undefined })
     customerId = customer.id
@@ -308,6 +326,7 @@ export async function createCustomerPortalSession() {
 
   if (!profile?.stripe_customer_id) return
 
+  const stripe = getStripeClient();
   const portalSession = await stripe.billingPortal.sessions.create({
     customer: profile.stripe_customer_id,
     return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
@@ -387,14 +406,7 @@ export async function getDashboardDemoResponse(values: { history: Message[] }) {
     return { response: "Sorry, our demo is currently offline. Please try again later." };
   }
 
-  const openrouter = new OpenAI({
-    baseURL: "https://openrouter.ai/api/v1",
-    apiKey: process.env.OPENROUTER_API_KEY,
-    defaultHeaders: {
-      "HTTP-Referer": process.env.NEXT_PUBLIC_SITE_URL,
-      "X-Title": "Intaj AI",
-    },
-  });
+  const openrouter = getOpenRouterClient();
 
   const demoBotPrompt = `You are a helpful and enthusiastic AI assistant for Intaj, an AI chatbot platform. Your goal is to guide new users and answer questions about the platform.
 

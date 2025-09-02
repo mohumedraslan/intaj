@@ -1,29 +1,30 @@
-import { createCipheriv, createDecipheriv, randomBytes, scryptSync } from 'crypto';
+import crypto from 'crypto';
 
-const algorithm = 'aes-256-gcm';
-const secret = process.env.ENCRYPTION_SECRET_KEY;
+const ENCRYPTION_KEY = process.env.ENCRYPTION_SECRET_KEY as string;
+const IV_LENGTH = 16;
 
-if (!secret || secret.length < 32) {
-  throw new Error('ENCRYPTION_SECRET_KEY must be at least 32 characters long');
+function checkEncryptionKey() {
+  if (!ENCRYPTION_KEY || ENCRYPTION_KEY.length < 32) {
+    throw new Error('ENCRYPTION_SECRET_KEY must be at least 32 characters long');
+  }
 }
 
-const key = scryptSync(secret, 'salt', 32);
-
-export function encrypt(text: string): string {
-  const iv = randomBytes(16);
-  const cipher = createCipheriv(algorithm, key, iv);
-  const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
-  const authTag = cipher.getAuthTag();
-  return `${iv.toString('hex')}:${encrypted.toString('hex')}:${authTag.toString('hex')}`;
+export function encrypt(text: string) {
+  checkEncryptionKey();
+  const iv = crypto.randomBytes(IV_LENGTH);
+  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY, 'hex'), iv);
+  let encrypted = cipher.update(text);
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
+  return iv.toString('hex') + ':' + encrypted.toString('hex');
 }
 
-export function decrypt(hash: string): string {
-  const [ivHex, encryptedHex, authTagHex] = hash.split(':');
-  const iv = Buffer.from(ivHex, 'hex');
-  const encrypted = Buffer.from(encryptedHex, 'hex');
-  const authTag = Buffer.from(authTagHex, 'hex');
-  const decipher = createDecipheriv(algorithm, key, iv);
-  decipher.setAuthTag(authTag);
-  const decrypted = Buffer.concat([decipher.update(encrypted), decipher.final()]);
+export function decrypt(text: string) {
+  checkEncryptionKey();
+  const textParts = text.split(':');
+  const iv = Buffer.from(textParts.shift() as string, 'hex');
+  const encryptedText = Buffer.from(textParts.join(':'), 'hex');
+  const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY, 'hex'), iv);
+  let decrypted = decipher.update(encryptedText);
+  decrypted = Buffer.concat([decrypted, decipher.final()]);
   return decrypted.toString();
 }

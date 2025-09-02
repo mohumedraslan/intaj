@@ -71,14 +71,7 @@ export default function PricingPage() {
                   </Button>
                 </Link>
               ) : tier.priceId ? (
-                <form action={async (formData) => {
-                  'use server';
-                  const result = await createCheckoutSession(formData);
-                  if (result?.error) {
-                    // Handle error - you could add toast notification here
-                    console.error(result.error);
-                  }
-                }} className="w-full">
+                <form action={createCheckoutSession} className="w-full">
                   <input type="hidden" name="priceId" value={tier.priceId} />
                   <Button type="submit" className="w-full">Subscribe</Button>
                 </form>
