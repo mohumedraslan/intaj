@@ -9,7 +9,7 @@ import { sendHumanReply } from '@/app/(dashboard)/actions';
 import { cn } from '@/lib/utils';
 
 async function getConversationDetails(conversationId: string, userId: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from('conversations')
     .select(`
@@ -94,7 +94,9 @@ export async function ChatPanel({ conversationId }: { conversationId: string }) 
       </main>
 
       <footer className="p-4 border-t bg-muted/50">
-        <form action={sendHumanReply}>
+        <form action={async (formData: FormData) => {
+          await sendHumanReply(formData);
+        }}>
           <div className="relative">
             <input type="hidden" name="conversationId" value={conversationId} />
             <Textarea

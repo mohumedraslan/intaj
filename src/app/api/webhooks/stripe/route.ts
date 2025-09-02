@@ -3,10 +3,12 @@ import Stripe from 'stripe'
 import { headers } from 'next/headers'
 import { createAdminClient } from '@/lib/supabase/admin'
 
-const stripe = new Stripe(process.env.STRIPE_API_KEY as string)
+export const dynamic = 'force-dynamic'
+
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string
 
 export async function POST(req: Request) {
+  const stripe = new Stripe(process.env.STRIPE_API_KEY as string)
   const body = await req.text()
   const headersList = await headers()
   const signature = headersList.get('Stripe-Signature') as string
@@ -44,5 +46,3 @@ export async function POST(req: Request) {
 
   return new Response(null, { status: 200 })
 }
-
-

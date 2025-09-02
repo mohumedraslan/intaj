@@ -1,24 +1,28 @@
 "use client";
 
 import * as React from "react";
-import { FormProvider, UseFormReturn, FieldValues, Path } from "react-hook-form";
+import {
+  FormProvider,
+  UseFormReturn,
+  FieldValues,
+  Path,
+  Controller,
+  ControllerProps,
+  FieldPath,
+} from "react-hook-form";
 
-export function Form({ children, ...props }: React.ComponentProps<typeof FormProvider>) {
+export function Form<TFieldValues extends FieldValues>({
+  children,
+  ...props
+}: { children: React.ReactNode } & UseFormReturn<TFieldValues>) {
   return <FormProvider {...props}>{children}</FormProvider>;
 }
 
-export function FormField<TFieldValues extends FieldValues, TName extends Path<TFieldValues> = Path<TFieldValues>>({
-  name,
-  control,
-  render,
-}: {
-  name: TName;
-  control: UseFormReturn<TFieldValues>["control"];
-  render: (props: { field: ReturnType<UseFormReturn<TFieldValues>["register"]> }) => React.ReactNode;
-}) {
-  const { register } = control as unknown as UseFormReturn<TFieldValues>;
-  const field = register(name);
-  return <>{render({ field })}</>;
+export function FormField<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>(props: ControllerProps<TFieldValues, TName>) {
+  return <Controller {...props} />;
 }
 
 export function FormItem({ className = "", ...props }: React.HTMLAttributes<HTMLDivElement>) {
@@ -44,5 +48,3 @@ export function FormMessage({ className = "", children, ...props }: React.HTMLAt
     </p>
   );
 }
-
-
