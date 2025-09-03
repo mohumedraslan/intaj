@@ -42,8 +42,8 @@ export function DashboardDemoAgent() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-card rounded-lg shadow-lg border border-border">
-      <div className="p-4 border-b border-border bg-muted/50 rounded-t-lg">
+  <div className="w-full max-w-2xl mx-auto bg-white rounded-lg shadow-lg border border-border">
+  <div className="p-4 border-b border-border bg-blue-50 rounded-t-lg">
         <div className="flex items-center space-x-2">
           <Bot className="h-5 w-5 text-primary" />
           <h3 className="font-semibold text-foreground">Dashboard Demo Agent</h3>
@@ -82,8 +82,8 @@ export function DashboardDemoAgent() {
             <div
               className={`max-w-xs px-4 py-2 rounded-lg ${
                 msg.role === 'user'
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted text-foreground'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-900'
               }`}
             >
               {msg.content}
@@ -93,7 +93,7 @@ export function DashboardDemoAgent() {
         
         {isPending && (
           <div className="flex justify-start">
-            <div className="bg-muted text-foreground px-4 py-2 rounded-lg">
+            <div className="bg-gray-100 text-gray-900 px-4 py-2 rounded-lg">
               <div className="flex items-center space-x-2">
                 <div className="animate-pulse">Intaj AI is thinking...</div>
                 <div className="flex space-x-1">
@@ -109,7 +109,7 @@ export function DashboardDemoAgent() {
         <div ref={messagesEndRef} />
       </div>
       
-      <div className="p-4 border-t border-border bg-muted/50 rounded-b-lg">
+  <div className="p-4 border-t border-border bg-blue-50 rounded-b-lg">
         <div className="flex space-x-2">
           <Input
             value={input}

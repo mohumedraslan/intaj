@@ -1,5 +1,7 @@
+
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Bot, Plug, HelpCircle, User, BarChart, LifeBuoy, LogOut, MessageSquare } from 'lucide-react';
@@ -19,80 +21,94 @@ const navItems = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const [collapsed, setCollapsed] = React.useState(false);
 
   return (
-    <div className="flex h-screen w-64 flex-col bg-card-bg border-r border-border">
+    <aside
+      className={cn(
+        "flex flex-col h-screen bg-white border-r border-border text-gray-900 transition-all duration-300",
+        collapsed ? "w-20" : "w-64"
+      )}
+      aria-label="Sidebar navigation"
+    >
+      {/* Mobile Toggle */}
+      <button
+        className="md:hidden absolute top-4 left-4 z-10 p-2 rounded-full bg-gray-100 hover:bg-blue-100 shadow"
+        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        onClick={() => setCollapsed((c) => !c)}
+      >
+        {collapsed ? <Home className="h-5 w-5 text-blue-600" /> : <Bot className="h-5 w-5 text-blue-600" />}
+      </button>
+
       {/* Logo */}
-      <div className="flex h-16 items-center border-b border-border px-6">
+      <div className={cn("flex items-center border-b border-border px-6", collapsed ? "h-16 justify-center" : "h-16")}
+        aria-label="Intaj logo section"
+      >
         <Link href="/dashboard" className="flex items-center space-x-2">
-          <div className="h-8 w-8 rounded-lg bg-brand-500 flex items-center justify-center">
+          <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center shadow">
             <span className="text-white font-bold text-lg">I</span>
           </div>
-          <span className="text-xl font-bold text-text">Intaj</span>
+          {!collapsed && <span className="text-xl font-bold text-blue-700">Intaj</span>}
         </Link>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-1 p-4">
+      <nav className={cn("flex-1 space-y-1 p-4", collapsed && "p-2")}
+        aria-label="Main navigation"
+      >
         {navItems.map(item => (
-          item.sub ? (
-            <div key={item.href} className="ml-6">
-              <Link
-                href={item.href}
-                className={cn(
-                  "flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                  pathname === item.href
-                    ? "bg-brand-500 text-white"
-                    : "text-muted hover:bg-accent hover:text-text"
-                )}
-              >
-                <span>{item.label}</span>
-              </Link>
-            </div>
-          ) : (
-            <Link
-              key={item.href}
-              href={item.disabled ? '#' : item.href}
-              className={cn(
-                "flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                item.disabled
-                  ? "text-muted/50 cursor-not-allowed"
-                  : pathname === item.href
-                  ? "bg-brand-500 text-white"
-                  : "text-muted hover:bg-accent hover:text-text"
-              )}
-              onClick={item.disabled ? (e) => e.preventDefault() : undefined}
-            >
-              <item.icon className="h-5 w-5" />
-              <span>{item.label}</span>
-              {item.disabled && (
-                <span className="ml-auto text-xs bg-muted px-2 py-1 rounded text-text">Soon</span>
-              )}
-            </Link>
-          )
+          <Link
+            key={item.href}
+            href={item.disabled ? '#' : item.href}
+            className={cn(
+              "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200",
+              collapsed ? "justify-center px-2" : "",
+              item.disabled
+                ? "text-gray-400 cursor-not-allowed"
+                : pathname === item.href
+                ? "bg-blue-600 text-white shadow"
+                : "text-gray-600 hover:bg-blue-50 hover:text-blue-700"
+            )}
+            aria-current={pathname === item.href ? "page" : undefined}
+            tabIndex={item.disabled ? -1 : 0}
+            onClick={item.disabled ? (e) => e.preventDefault() : undefined}
+          >
+            <item.icon className={cn("h-5 w-5", collapsed ? "mx-auto" : "")} />
+            {!collapsed && <span>{item.label}</span>}
+            {item.disabled && !collapsed && (
+              <span className="ml-auto text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">Soon</span>
+            )}
+          </Link>
         ))}
       </nav>
 
       {/* Bottom Section */}
-      <div className="border-t border-border p-4 space-y-2">
+      <div className={cn("border-t border-border p-4 space-y-2", collapsed && "p-2")}
+        aria-label="Sidebar bottom section"
+      >
         <Link
           href="/help"
-          className="flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium text-muted hover:bg-accent hover:text-text transition-colors"
+          className={cn(
+            "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200",
+            collapsed ? "justify-center px-2" : ""
+          )}
         >
           <LifeBuoy className="h-5 w-5" />
-          <span>Need Custom Work?</span>
+          {!collapsed && <span>Need Custom Work?</span>}
         </Link>
-        
         <form action="/auth/signout" method="post">
           <button
             type="submit"
-            className="flex w-full items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium text-muted hover:bg-accent hover:text-text transition-colors"
+            className={cn(
+              "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200",
+              collapsed ? "justify-center px-2" : ""
+            )}
           >
             <LogOut className="h-5 w-5" />
-            <span>Sign Out</span>
+            {!collapsed && <span>Sign Out</span>}
           </button>
         </form>
       </div>
-    </div>
+    </aside>
   );
 }

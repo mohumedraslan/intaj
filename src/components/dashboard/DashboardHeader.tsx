@@ -16,7 +16,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
   const isSubscribed = user.subscription_status === 'active' || user.subscription_status === 'trialing'
 
   return (
-    <header className="flex items-center justify-between border-b bg-background p-4">
+    <header className="flex items-center justify-between border-b bg-white p-4 shadow-sm">
       <Link href="/dashboard" className="text-xl font-semibold">
         Intaj
       </Link>

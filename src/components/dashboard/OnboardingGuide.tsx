@@ -19,7 +19,7 @@ export function OnboardingGuide({ chatbotCount }: OnboardingGuideProps) {
   }
 
   return (
-    <Card className="mb-6 border-2 border-blue-200 bg-blue-50">
+    <Card className="mb-6 border-2 border-blue-200 bg-white">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-blue-900">
           <CheckCircle2 className="h-5 w-5" />

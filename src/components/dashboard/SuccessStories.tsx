@@ -31,15 +31,15 @@ export function SuccessStories() {
       <CardContent>
         <div className="space-y-4">
           {stories.map((story, index) => (
-            <div key={index} className="p-4 border rounded-lg bg-muted/30">
+            <div key={index} className="p-4 border rounded-lg bg-white shadow-sm">
               <div className="flex items-start gap-3">
-                <div className="p-2 bg-primary/20 rounded-lg">
+                <div className="p-2 bg-blue-50 rounded-lg">
                   <story.icon className="h-4 w-4 text-primary" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <h4 className="font-semibold text-foreground">{story.company}</h4>
-                    <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
                       {story.industry}
                     </span>
                   </div>
@@ -55,7 +55,7 @@ export function SuccessStories() {
           ))}
         </div>
         
-        <div className="mt-4 p-3 bg-primary/10 rounded-lg text-center">
+  <div className="mt-4 p-3 bg-blue-50 rounded-lg text-center">
           <p className="text-sm text-primary font-medium">
             Ready to create your own success story?
           </p>
