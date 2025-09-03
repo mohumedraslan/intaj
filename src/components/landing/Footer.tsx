@@ -11,13 +11,14 @@ const Logo = () => (
 const footerLinks = {
   product: [
     { href: '/pricing', label: 'Pricing' },
+    { href: '/pricing#free', label: 'Free forever plan' },
     { href: '#features', label: 'Features' },
     { href: '/docs', label: 'Documentation' },
   ],
   company: [
-    { href: '/about', label: 'About Us' },
+    { href: '#about', label: 'About Us' },
     { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact' },
+    { href: '#contact', label: 'Contact' },
   ],
   legal: [
     { href: '/terms', label: 'Terms of Service' },

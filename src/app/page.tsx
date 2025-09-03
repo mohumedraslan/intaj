@@ -46,46 +46,42 @@ const useCases = [
 export default function HighConversionPage() {
   return (
     <div className="min-h-screen bg-background">
-                {/* Hero Section */}
-          <section className="pt-24 md:pt-32">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-              {/* Left Column: Text Content */}
-              <div className="text-center md:text-left space-y-6">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight">
-                  Smart Automation for Egyptian Businesses
-                </h1>
-                <p className="max-w-2xl mx-auto md:mx-0 text-lg text-muted-foreground">
-                  Stop losing customers to slow responses. Intaj AI instantly engages every lead, turning conversations into conversions, 24/7.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                  <Link href="/signup">
-                    <Button size="lg">
-                      Get Started for Free
-                    </Button>
-                  </Link>
-                  <Link href="/signup">
-                    <Button size="lg" variant="outline">
-                      Book a Free Demo
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+      {/* Hero Section */}
+      <section id="home" className="pt-24 md:pt-32 text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight">
+            The All-in-One AI Platform for Business Growth
+          </h1>
+          <p className="max-w-2xl mx-auto mt-6 text-lg text-muted-foreground">
+            Stop Losing Customers. Start Automating Conversations.
+          </p>
 
-              {/* Right Column: Image Placeholder */}
-              <div className="hidden md:block">
-                <div className="w-full h-80 bg-card rounded-lg border border-border flex items-center justify-center">
-                  <p className="text-muted-foreground">Hero Image Placeholder</p>
-                </div>
-              </div>
+          <div className="mt-10">
+            <h2 className="text-2xl font-bold text-foreground">Ready to Transform Your Business?</h2>
+            <div className="flex justify-center mt-4">
+              <Link href="/signup">
+                <Button size="lg" className="group">
+                  Create your first AI agent
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </div>
-          </section>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Create your first AI agent in under 5 minutes. No credit card required.
+            </p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              ✓ Free forever plan • ✓ No setup fees • ✓ Cancel anytime
+            </p>
+          </div>
+        </div>
+      </section>
 
-      {/* Features/Benefits Section */}
+      {/* Key Benefits Section */}
       <section id="features" className="py-20 sm:py-32 bg-secondary/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              The All-in-One AI Platform for Business Growth
+              Unlock Key Benefits for Your Business
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Go beyond simple chatbots. Build powerful AI agents for every part of your business.
@@ -110,8 +106,8 @@ export default function HighConversionPage() {
         </div>
       </section>
 
-      {/* Use Cases Section */}
-      <section id="use-cases" className="py-20 sm:py-32">
+      {/* Customer Touchpoints Section */}
+      <section id="solutions" className="py-20 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
@@ -150,8 +146,8 @@ export default function HighConversionPage() {
         </div>
       </section>
 
-      {/* Social Proof Section */}
-      <section className="py-20 sm:py-32">
+      {/* Credibility Section */}
+      <section id="about" className="py-20 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
@@ -163,44 +159,33 @@ export default function HighConversionPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
             <div className="w-40 h-16 flex items-center justify-center text-muted-foreground font-semibold text-lg">
-              Company A
+              Client Logo 1
             </div>
             <div className="w-40 h-16 flex items-center justify-center text-muted-foreground font-semibold text-lg">
-              Company B
+              Client Logo 2
             </div>
             <div className="w-40 h-16 flex items-center justify-center text-muted-foreground font-semibold text-lg">
-              Company C
+              Client Logo 3
             </div>
             <div className="w-40 h-16 flex items-center justify-center text-muted-foreground font-semibold text-lg">
-              Company D
+              Client Logo 4
             </div>
           </div>
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="py-20 sm:py-32">
+      {/* Contact Section */}
+      <section id="contact" className="py-20 sm:py-32 bg-secondary/50">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            Ready to Transform Your Business?
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Create your first AI agent in under 5 minutes. No credit card required.
-          </p>
-          <div className="flex justify-center">
-            <Link href="/signup">
-              <Button size="lg" className="group">
-                Start Your Free Trial Now
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Contact Us</h2>
+            <p className="text-lg text-muted-foreground">Have questions? We'd love to hear from you.</p>
+            <Link href="mailto:contact@intaj.ai">
+                <Button size="lg">
+                    Get in Touch
+                </Button>
             </Link>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            ✓ Free forever plan ✓ No setup fees ✓ Cancel anytime
-          </p>
         </div>
       </section>
-
     </div>
   );
 }
