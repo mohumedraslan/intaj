@@ -28,7 +28,12 @@ const sizeClasses: Record<NonNullable<ButtonProps["size"]>, string> = {
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className = "", variant = "default", size = "md", ...props }, ref) => {
     const classes = `${sizeClasses[size]} ${variantClasses[variant]} inline-flex items-center justify-center whitespace-nowrap transition-colors ${className}`;
-    return <button ref={ref} className={classes} {...props} />;
+    // Remove fdprocessedid if present, without using 'any' or unused variable
+    const safeProps = { ...props };
+    if ('fdprocessedid' in safeProps) {
+      delete (safeProps as Record<string, unknown>).fdprocessedid;
+    }
+    return <button ref={ref} className={classes} {...safeProps} />;
   }
 );
 

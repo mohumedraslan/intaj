@@ -26,7 +26,7 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "flex flex-col h-screen bg-white border-r border-border text-gray-900 transition-all duration-300",
+        "flex flex-col h-screen bg-gray-900 border-r border-border text-white transition-all duration-300",
         collapsed ? "w-20" : "w-64"
       )}
       aria-label="Sidebar navigation"
@@ -48,12 +48,12 @@ export function Sidebar() {
           <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center shadow">
             <span className="text-white font-bold text-lg">I</span>
           </div>
-          {!collapsed && <span className="text-xl font-bold text-blue-700">Intaj</span>}
+          {!collapsed && <span className="text-xl font-bold text-white">Intaj</span>}
         </Link>
       </div>
 
       {/* Navigation */}
-      <nav className={cn("flex-1 space-y-1 p-4", collapsed && "p-2")}
+      <nav className={cn("flex-1 space-y-1 px-4 py-6", collapsed && "p-2")}
         aria-label="Main navigation"
       >
         {navItems.map(item => (
@@ -67,7 +67,7 @@ export function Sidebar() {
                 ? "text-gray-400 cursor-not-allowed"
                 : pathname === item.href
                 ? "bg-blue-600 text-white shadow"
-                : "text-gray-600 hover:bg-blue-50 hover:text-blue-700"
+                : "text-gray-300 hover:bg-gray-800 hover:text-blue-400"
             )}
             aria-current={pathname === item.href ? "page" : undefined}
             tabIndex={item.disabled ? -1 : 0}
@@ -83,7 +83,7 @@ export function Sidebar() {
       </nav>
 
       {/* Bottom Section */}
-      <div className={cn("border-t border-border p-4 space-y-2", collapsed && "p-2")}
+      <div className={cn("border-t border-border px-4 py-6 space-y-2", collapsed && "p-2")}
         aria-label="Sidebar bottom section"
       >
         <Link

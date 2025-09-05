@@ -46,9 +46,9 @@ const useCases = [
 export default function HighConversionPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section id="home" className="pt-24 md:pt-32 text-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 flex flex-col space-y-24">
+        {/* Hero Section */}
+        <section id="home" className="pt-24 md:pt-32 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight">
             The All-in-One AI Platform for Business Growth
           </h1>
@@ -73,12 +73,10 @@ export default function HighConversionPage() {
               ✓ Free forever plan • ✓ No setup fees • ✓ Cancel anytime
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Key Benefits Section */}
-      <section id="features" className="py-20 sm:py-32 bg-secondary/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Key Benefits Section */}
+        <section id="features" className="py-20 sm:py-32 bg-secondary/50 rounded-2xl">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               Unlock Key Benefits for Your Business
@@ -90,7 +88,7 @@ export default function HighConversionPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="text-center p-6 bg-background transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              <Card key={index} className="text-center p-6 bg-background transition-all duration-300 hover:shadow-lg hover:-translate-y-1 max-w-md mx-auto w-full">
                 <CardContent className="space-y-4">
                   <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
                     {feature.icon}
@@ -103,12 +101,10 @@ export default function HighConversionPage() {
               </Card>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Customer Touchpoints Section */}
-      <section id="solutions" className="py-20 sm:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Customer Touchpoints Section */}
+        <section id="solutions" className="py-20 sm:py-32">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               Transform Every Customer Touchpoint
@@ -120,7 +116,7 @@ export default function HighConversionPage() {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {useCases.map((useCase, index) => (
-              <Card key={index} className="p-6 bg-secondary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              <Card key={index} className="p-6 bg-secondary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 max-w-md mx-auto w-full">
                 <CardHeader className="pb-4">
                   <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center mb-4">
                     {useCase.icon}
@@ -143,12 +139,10 @@ export default function HighConversionPage() {
               </Card>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Credibility Section */}
-      <section id="about" className="py-20 sm:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Credibility Section */}
+        <section id="about" className="py-20 sm:py-32">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               Trusted by Leading Businesses in the MENA Region
@@ -171,21 +165,21 @@ export default function HighConversionPage() {
               Client Logo 4
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 sm:py-32 bg-secondary/50">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Contact Us</h2>
-            <p className="text-lg text-muted-foreground">Have questions? We'd love to hear from you.</p>
-            <Link href="mailto:contact@intaj.ai">
-                <Button size="lg">
-                    Get in Touch
-                </Button>
-            </Link>
-        </div>
-      </section>
+        {/* Contact Section */}
+        <section id="contact" className="py-20 sm:py-32 bg-secondary/50 rounded-2xl">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground">Contact Us</h2>
+              <p className="text-lg text-muted-foreground">Have questions? We'd love to hear from you.</p>
+              <Link href="mailto:contact@intaj.ai">
+                  <Button size="lg">
+                      Get in Touch
+                  </Button>
+              </Link>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

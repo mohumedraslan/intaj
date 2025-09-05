@@ -1,13 +1,29 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useTransition, useEffect } from 'react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { login, signup } from '@/app/auth/actions';
+import { login } from '@/app/auth/actions';
+import { useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
+import { Checkbox } from '@/components/ui/checkbox';
 
 export default function LoginForm() {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        router.replace('/dashboard');
+      }
+    };
+    checkSession();
+  }, [router]);
 
   const handleLogin = (formData: FormData) => {
     startTransition(async () => {
@@ -18,67 +34,61 @@ export default function LoginForm() {
     });
   };
 
-  const handleSignup = (formData: FormData) => {
-    startTransition(async () => {
-      const result = await signup(undefined, formData);
-      if (result?.message) {
-        toast.error(result.message);
-      }
-    });
-  };
-
   return (
-    <div className="space-y-4">
-      <form action={handleLogin} className="space-y-4">
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-foreground">
-            Email
-          </label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            required
-            className="mt-1"
-            placeholder="Enter your email"
-          />
-        </div>
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-foreground">
-            Password
-          </label>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            required
-            className="mt-1"
-            placeholder="Enter your password"
-          />
-        </div>
-        <Button type="submit" className="w-full" disabled={isPending}>
-          {isPending ? 'Signing in...' : 'Sign In'}
-        </Button>
-      </form>
-
-      <div className="mt-6">
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300" />
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-background text-muted-foreground">Or</span>
-          </div>
-        </div>
-
-        <div className="mt-6">
-          <form action={handleSignup}>
-            <Button type="submit" variant="outline" className="w-full" disabled={isPending}>
-              {isPending ? 'Creating account...' : 'Create Account'}
-            </Button>
-          </form>
-        </div>
+    <form action={handleLogin} className="space-y-4">
+      <div className="space-y-2">
+        <label htmlFor="email" className="text-sm font-medium text-gray-700">Email address</label>
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          required
+          className="w-full border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+          placeholder="name@example.com"
+        />
       </div>
-    </div>
+      <div className="space-y-2">
+        <label htmlFor="password" className="text-sm font-medium text-gray-700">Password</label>
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          required
+          className="w-full border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+          placeholder="••••••••"
+        />
+      </div>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <Checkbox id="remember" name="remember" />
+          <label
+            htmlFor="remember"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700"
+          >
+            Remember me
+          </label>
+        </div>
+        <Link href="#" className="text-sm font-medium text-blue-600 hover:text-blue-500">
+          Forgot password?
+        </Link>
+      </div>
+      <Button 
+        type="submit" 
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition-colors"
+        disabled={isPending}
+      >
+        {isPending ? 'Signing in...' : 'Sign In'}
+      </Button>
+      <div className="text-center mt-4">
+        <p className="text-sm text-gray-600">
+          Don't have an account?{' '}
+          <Link href="/signup" className="font-medium text-blue-600 hover:text-blue-500 transition-colors">
+            Create an account
+          </Link>
+        </p>
+      </div>
+    </form>
   );
 }

@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 import LandingSidebar from "@/components/landing/LandingSidebar";
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { ThemeFavicon } from "@/components/ui/theme-favicon";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,16 +28,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LandingSidebar />
-        <div className="lg:ml-64 flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </div>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeFavicon />
+          <div className="relative min-h-screen flex">
+            <LandingSidebar />
+            <div className="flex-1">
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl lg:ml-64">
+                <Header />
+                <main className="py-8">{children}</main>
+                <Footer />
+              </div>
+            </div>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

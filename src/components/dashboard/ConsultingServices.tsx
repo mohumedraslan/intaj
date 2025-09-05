@@ -38,30 +38,34 @@ export function ConsultingServices() {
         <CardTitle>Professional Consulting Services</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
           {services.map((service, index) => (
-            <div key={index} className="p-4 border rounded-lg hover:bg-muted/30 transition-colors">
-              <div className="flex items-start gap-3">
-                <div className={`p-2 rounded-lg ${service.color} bg-opacity-20`}>
-                  <service.icon className={`h-5 w-5 ${service.color}`} />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-foreground mb-1">
-                    {service.title}
-                  </h4>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            </div>
+            <button
+              key={index}
+              type="button"
+              className={
+                `flex items-center gap-3 p-5 rounded-xl bg-white border border-gray-100 shadow-sm transition-all duration-200 hover:bg-blue-50 hover:shadow-md hover:scale-[1.03] focus:outline-none`
+              }
+              style={{ cursor: 'pointer' }}
+            >
+              <span className={`p-2 rounded-lg ${service.color} bg-opacity-20 flex items-center justify-center`}>
+                <service.icon className={`h-6 w-6 ${service.color}`} />
+              </span>
+              <span className="flex-1 text-left">
+                <span className="font-semibold text-foreground text-base block mb-1">{service.title}</span>
+                <span className="text-sm text-muted-foreground block">{service.description}</span>
+              </span>
+            </button>
           ))}
         </div>
-        
-        <div className="mt-6 text-center">
+
+        <div className="mt-8 text-center">
           <Link href="https://rabt.nabih.tech" target="_blank" rel="noopener noreferrer">
-            <Button className="w-full">
-              Book a Consultation
+            <Button
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full py-3 px-6 text-lg transition-transform duration-200 hover:scale-105 shadow-md"
+              style={{ boxShadow: '0 4px 12px rgba(0, 123, 255, 0.12)' }}
+            >
+              Need Custom Work?
             </Button>
           </Link>
           <p className="text-xs text-muted-foreground mt-2">

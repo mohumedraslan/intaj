@@ -6,23 +6,29 @@ import { type UserProfile } from '@/lib/types'
 
 // --- REAL GET-SESSION IMPLEMENTATION ---
 export async function getSession(): Promise<{ user: UserProfile | null }> {
-  console.log("Attempting to get session..."); // Log entry point
-  
-  const supabase = await createClient();
-  const { 
-    data: { user: authUser }, 
-    error: authError 
-  } = await supabase.auth.getUser();
-  
-  if (authError) {
-    console.error("Supabase auth error in getSession:", authError.message); // Log any auth error
-    return { user: null };
-  }
-  
-  if (!authUser) {
-    console.log("No authenticated user found in session."); // Log if no user
-    return { user: null };
-  }
+  try {
+    console.log("Attempting to get session..."); // Log entry point
+    
+    const supabase = await createClient();
+    const { 
+      data: { user: authUser }, 
+      error: authError 
+    } = await supabase.auth.getUser();
+    
+    if (authError) {
+      // Don't log as error for missing session - this is expected for non-logged in users
+      if (authError.message === 'Auth session missing!') {
+        console.log("No auth session found - user not logged in");
+      } else {
+        console.error("Supabase auth error in getSession:", authError.message);
+      }
+      return { user: null };
+    }
+    
+    if (!authUser) {
+      console.log("No authenticated user found in session."); // Log if no user
+      return { user: null };
+    }
   
   console.log(`User found: ${authUser.id}. Fetching profile...`); // Log successful user retrieval
   
@@ -51,6 +57,10 @@ export async function getSession(): Promise<{ user: UserProfile | null }> {
   };
   
   return { user };
+  } catch (error) {
+    console.error("Unexpected error in getSession:", error);
+    return { user: null };
+  }
 }
 
 export async function login(
@@ -75,12 +85,72 @@ export async function signup(
   const supabase = await createClient()
   const email = formData.get('email') as string
   const password = formData.get('password') as string
+  const firstName = formData.get('firstName') as string
+  const lastName = formData.get('lastName') as string
+  const confirmPassword = formData.get('confirmPassword') as string
+  const termsAccepted = formData.get('terms') === 'on'
   
-  const { error } = await supabase.auth.signUp({ email, password })
-  if (error) {
-    return { message: error.message }
+  // Validate required fields
+  if (!email || !password || !firstName || !lastName || !confirmPassword) {
+    return { message: 'All fields are required' }
   }
-  redirect('/dashboard')
+  
+  // Validate terms acceptance
+  if (!termsAccepted) {
+    return { message: 'You must accept the Terms of Service and Privacy Policy' }
+  }
+  
+  // Validate passwords match
+  if (password !== confirmPassword) {
+    return { message: 'Passwords do not match' }
+  }
+  
+  // Validate password strength
+  if (password.length < 8) {
+    return { message: 'Password must be at least 8 characters long' }
+  }
+  
+  try {
+    const { data, error } = await supabase.auth.signUp({ 
+      email, 
+      password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          full_name: `${firstName} ${lastName}`
+        }
+      }
+    })
+    
+    if (error) {
+      return { message: error.message }
+    }
+    
+    // Create profile entry
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .upsert({
+        id: data.user?.id,
+        email,
+        first_name: firstName,
+        last_name: lastName,
+        full_name: `${firstName} ${lastName}`,
+        created_at: new Date().toISOString()
+      })
+    
+    if (profileError) {
+      console.error('Error creating profile:', profileError)
+      return { message: 'Account created but profile setup failed. Please contact support.' }
+    }
+    
+    return { message: 'Account created successfully! Please check your email for verification.' }
+  } catch (error) {
+    if (error instanceof Error) {
+      return { message: error.message }
+    }
+    return { message: 'An error occurred during signup' }
+  }
 }
 
 export async function signupWithGoogle() {

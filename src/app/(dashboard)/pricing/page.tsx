@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Check } from 'lucide-react'
 import { createCheckoutSession } from '@/app/(dashboard)/actions'
 import Link from 'next/link'
+import './pricing.css'
 
 const tiers = [
   {
@@ -45,25 +46,25 @@ export default function PricingPage() {
         <p className="text-muted">Choose the plan that&apos;s right for you.</p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="flex flex-col gap-6">
         {tiers.map((tier) => (
-          <Card key={tier.name}>
-            <CardHeader>
-              <CardTitle>{tier.name}</CardTitle>
-              <CardDescription>{tier.description}</CardDescription>
+          <Card key={tier.name} className="pricing-card flex flex-col md:flex-row overflow-hidden">
+            <CardHeader className="pricing-card-header md:w-1/4 md:border-r md:border-r-primary/10">
+              <CardTitle className="text-2xl">{tier.name}</CardTitle>
+              <div className="pricing-card-price mt-2">{tier.price}<span className="pricing-card-price-period">/month</span></div>
+              <CardDescription className="mt-2">{tier.description}</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="mb-4 text-3xl font-bold">{tier.price}<span className="text-base font-normal">/month</span></div>
+            <CardContent className="md:w-2/4 flex flex-col justify-center">
               <ul className="space-y-2">
                 {tier.features.map((feature) => (
-                                   <li key={feature} className="flex items-center gap-2">
-                   <Check className="h-4 w-4 text-primary" />
-                   <span>{feature}</span>
-                 </li>
+                  <li key={feature} className="pricing-feature-item flex items-center gap-2">
+                    <Check className="pricing-feature-icon h-4 w-4" />
+                    <span className="text-foreground">{feature}</span>
+                  </li>
                 ))}
               </ul>
             </CardContent>
-            <div className="p-5 border-t border-border">
+            <div className="pricing-card-cta p-5 md:w-1/4 flex items-center justify-center md:border-l md:border-l-primary/10">
               {tier.isCustom ? (
                 <Link href="https://rabt.nabih.tech" target="_blank" rel="noopener noreferrer">
                   <Button className="w-full" variant="default">

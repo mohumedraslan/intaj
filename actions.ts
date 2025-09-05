@@ -1,0 +1,1963 @@
+  // all tables 
+
+
+  // [
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "audit_log_entries"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "flow_state"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "identities"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "instances"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "mfa_amr_claims"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "mfa_challenges"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "mfa_factors"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "oauth_clients"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "one_time_tokens"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "refresh_tokens"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "saml_providers"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "saml_relay_states"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "schema_migrations"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "sessions"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "sso_domains"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "sso_providers"
+  //   },
+  //   {
+  //     "table_schema": "auth",
+  //     "table_name": "users"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "sql_features"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "sql_implementation_info"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "sql_parts"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "sql_sizing"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_aggregate"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_am"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_amop"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_amproc"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_attrdef"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_attribute"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_auth_members"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_authid"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_cast"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_class"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_collation"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_constraint"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_conversion"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_database"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_db_role_setting"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_default_acl"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_depend"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_description"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_enum"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_event_trigger"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_extension"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_foreign_data_wrapper"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_foreign_server"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_foreign_table"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_index"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_inherits"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_init_privs"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_language"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_largeobject"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_largeobject_metadata"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_namespace"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_opclass"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_operator"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_opfamily"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_parameter_acl"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_partitioned_table"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_policy"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_proc"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_publication"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_publication_namespace"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_publication_rel"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_range"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_replication_origin"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_rewrite"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_seclabel"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_sequence"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_shdepend"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_shdescription"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_shseclabel"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statistic"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statistic_ext"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statistic_ext_data"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_subscription"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_subscription_rel"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_tablespace"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_transform"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_trigger"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_ts_config"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_ts_config_map"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_ts_dict"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_ts_parser"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_ts_template"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_type"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_user_mapping"
+  //   },
+  //   {
+  //     "table_schema": "public",
+  //     "table_name": "agents"
+  //   },
+  //   {
+  //     "table_schema": "public",
+  //     "table_name": "connections"
+  //   },
+  //   {
+  //     "table_schema": "public",
+  //     "table_name": "data_sources"
+  //   },
+  //   {
+  //     "table_schema": "public",
+  //     "table_name": "faqs"
+  //   },
+  //   {
+  //     "table_schema": "public",
+  //     "table_name": "interviews"
+  //   },
+  //   {
+  //     "table_schema": "public",
+  //     "table_name": "messages"
+  //   },
+  //   {
+  //     "table_schema": "public",
+  //     "table_name": "notifications"
+  //   },
+  //   {
+  //     "table_schema": "public",
+  //     "table_name": "profiles"
+  //   },
+  //   {
+  //     "table_schema": "public",
+  //     "table_name": "project_interests"
+  //   },
+  //   {
+  //     "table_schema": "public",
+  //     "table_name": "projects"
+  //   },
+  //   {
+  //     "table_schema": "realtime",
+  //     "table_name": "messages"
+  //   },
+  //   {
+  //     "table_schema": "realtime",
+  //     "table_name": "messages_2025_08_26"
+  //   },
+  //   {
+  //     "table_schema": "realtime",
+  //     "table_name": "messages_2025_08_27"
+  //   },
+  //   {
+  //     "table_schema": "realtime",
+  //     "table_name": "messages_2025_08_28"
+  //   },
+  //   {
+  //     "table_schema": "realtime",
+  //     "table_name": "messages_2025_08_29"
+  //   },
+  //   {
+  //     "table_schema": "realtime",
+  //     "table_name": "messages_2025_08_30"
+  //   },
+  //   {
+  //     "table_schema": "realtime",
+  //     "table_name": "messages_2025_08_31"
+  //   },
+  //   {
+  //     "table_schema": "realtime",
+  //     "table_name": "messages_2025_09_01"
+  //   },
+  //   {
+  //     "table_schema": "realtime",
+  //     "table_name": "schema_migrations"
+  //   },
+  //   {
+  //     "table_schema": "realtime",
+  //     "table_name": "subscription"
+  //   },
+  //   {
+  //     "table_schema": "storage",
+  //     "table_name": "buckets"
+  //   },
+  //   {
+  //     "table_schema": "storage",
+  //     "table_name": "buckets_analytics"
+  //   },
+  //   {
+  //     "table_schema": "storage",
+  //     "table_name": "migrations"
+  //   },
+  //   {
+  //     "table_schema": "storage",
+  //     "table_name": "objects"
+  //   },
+  //   {
+  //     "table_schema": "storage",
+  //     "table_name": "prefixes"
+  //   },
+  //   {
+  //     "table_schema": "storage",
+  //     "table_name": "s3_multipart_uploads"
+  //   },
+  //   {
+  //     "table_schema": "storage",
+  //     "table_name": "s3_multipart_uploads_parts"
+  //   },
+  //   {
+  //     "table_schema": "vault",
+  //     "table_name": "secrets"
+  //   }
+  // ]
+
+
+
+
+  // all views 
+
+
+
+  // [
+  //   {
+  //     "table_schema": "extensions",
+  //     "table_name": "pg_stat_statements"
+  //   },
+  //   {
+  //     "table_schema": "extensions",
+  //     "table_name": "pg_stat_statements_info"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "_pg_foreign_data_wrappers"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "_pg_foreign_servers"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "_pg_foreign_table_columns"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "_pg_foreign_tables"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "_pg_user_mappings"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "administrable_role_authorizations"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "applicable_roles"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "attributes"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "character_sets"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "check_constraint_routine_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "check_constraints"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "collation_character_set_applicability"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "collations"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "column_column_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "column_domain_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "column_options"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "column_privileges"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "column_udt_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "columns"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "constraint_column_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "constraint_table_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "data_type_privileges"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "domain_constraints"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "domain_udt_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "domains"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "element_types"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "enabled_roles"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "foreign_data_wrapper_options"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "foreign_data_wrappers"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "foreign_server_options"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "foreign_servers"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "foreign_table_options"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "foreign_tables"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "information_schema_catalog_name"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "key_column_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "parameters"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "referential_constraints"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "role_column_grants"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "role_routine_grants"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "role_table_grants"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "role_udt_grants"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "role_usage_grants"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "routine_column_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "routine_privileges"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "routine_routine_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "routine_sequence_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "routine_table_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "routines"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "schemata"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "sequences"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "table_constraints"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "table_privileges"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "tables"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "transforms"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "triggered_update_columns"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "triggers"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "udt_privileges"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "usage_privileges"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "user_defined_types"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "user_mapping_options"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "user_mappings"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "view_column_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "view_routine_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "view_table_usage"
+  //   },
+  //   {
+  //     "table_schema": "information_schema",
+  //     "table_name": "views"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_available_extension_versions"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_available_extensions"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_backend_memory_contexts"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_config"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_cursors"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_file_settings"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_group"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_hba_file_rules"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_ident_file_mappings"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_indexes"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_locks"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_matviews"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_policies"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_prepared_statements"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_prepared_xacts"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_publication_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_replication_origin_status"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_replication_slots"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_roles"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_rules"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_seclabels"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_sequences"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_settings"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_shadow"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_shmem_allocations"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_activity"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_all_indexes"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_all_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_archiver"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_bgwriter"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_checkpointer"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_database"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_database_conflicts"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_gssapi"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_io"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_progress_analyze"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_progress_basebackup"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_progress_cluster"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_progress_copy"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_progress_create_index"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_progress_vacuum"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_recovery_prefetch"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_replication"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_replication_slots"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_slru"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_ssl"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_subscription"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_subscription_stats"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_sys_indexes"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_sys_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_user_functions"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_user_indexes"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_user_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_wal"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_wal_receiver"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_xact_all_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_xact_sys_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_xact_user_functions"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stat_xact_user_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statio_all_indexes"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statio_all_sequences"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statio_all_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statio_sys_indexes"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statio_sys_sequences"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statio_sys_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statio_user_indexes"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statio_user_sequences"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_statio_user_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stats"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stats_ext"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_stats_ext_exprs"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_tables"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_timezone_abbrevs"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_timezone_names"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_user"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_user_mappings"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_views"
+  //   },
+  //   {
+  //     "table_schema": "pg_catalog",
+  //     "table_name": "pg_wait_events"
+  //   },
+  //   {
+  //     "table_schema": "vault",
+  //     "table_name": "decrypted_secrets"
+  //   }
+  // ]
+
+
+
+
+
+  // all functions 
+
+
+  // [
+  //   {
+  //     "schema": "auth",
+  //     "function_name": "email",
+  //     "return_type": "text",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "auth",
+  //     "function_name": "jwt",
+  //     "return_type": "jsonb",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "auth",
+  //     "function_name": "role",
+  //     "return_type": "text",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "auth",
+  //     "function_name": "uid",
+  //     "return_type": "uuid",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "armor",
+  //     "return_type": "text",
+  //     "arguments": "bytea"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "armor",
+  //     "return_type": "text",
+  //     "arguments": "bytea, text[], text[]"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "crypt",
+  //     "return_type": "text",
+  //     "arguments": "text, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "dearmor",
+  //     "return_type": "bytea",
+  //     "arguments": "text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "decrypt",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "decrypt_iv",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, bytea, bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "digest",
+  //     "return_type": "bytea",
+  //     "arguments": "text, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "digest",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "encrypt",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "encrypt_iv",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, bytea, bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "gen_random_bytes",
+  //     "return_type": "bytea",
+  //     "arguments": "integer"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "gen_random_uuid",
+  //     "return_type": "uuid",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "gen_salt",
+  //     "return_type": "text",
+  //     "arguments": "text, integer"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "gen_salt",
+  //     "return_type": "text",
+  //     "arguments": "text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "grant_pg_cron_access",
+  //     "return_type": "event_trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "grant_pg_graphql_access",
+  //     "return_type": "event_trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "grant_pg_net_access",
+  //     "return_type": "event_trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "hmac",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "hmac",
+  //     "return_type": "bytea",
+  //     "arguments": "text, text, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pg_stat_statements",
+  //     "return_type": "SETOF record",
+  //     "arguments": "showtext boolean, OUT userid oid, OUT dbid oid, OUT toplevel boolean, OUT queryid bigint, OUT query text, OUT plans bigint, OUT total_plan_time double precision, OUT min_plan_time double precision, OUT max_plan_time double precision, OUT mean_plan_time double precision, OUT stddev_plan_time double precision, OUT calls bigint, OUT total_exec_time double precision, OUT min_exec_time double precision, OUT max_exec_time double precision, OUT mean_exec_time double precision, OUT stddev_exec_time double precision, OUT rows bigint, OUT shared_blks_hit bigint, OUT shared_blks_read bigint, OUT shared_blks_dirtied bigint, OUT shared_blks_written bigint, OUT local_blks_hit bigint, OUT local_blks_read bigint, OUT local_blks_dirtied bigint, OUT local_blks_written bigint, OUT temp_blks_read bigint, OUT temp_blks_written bigint, OUT shared_blk_read_time double precision, OUT shared_blk_write_time double precision, OUT local_blk_read_time double precision, OUT local_blk_write_time double precision, OUT temp_blk_read_time double precision, OUT temp_blk_write_time double precision, OUT wal_records bigint, OUT wal_fpi bigint, OUT wal_bytes numeric, OUT jit_functions bigint, OUT jit_generation_time double precision, OUT jit_inlining_count bigint, OUT jit_inlining_time double precision, OUT jit_optimization_count bigint, OUT jit_optimization_time double precision, OUT jit_emission_count bigint, OUT jit_emission_time double precision, OUT jit_deform_count bigint, OUT jit_deform_time double precision, OUT stats_since timestamp with time zone, OUT minmax_stats_since timestamp with time zone"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pg_stat_statements_info",
+  //     "return_type": "record",
+  //     "arguments": "OUT dealloc bigint, OUT stats_reset timestamp with time zone"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pg_stat_statements_reset",
+  //     "return_type": "timestamp with time zone",
+  //     "arguments": "userid oid DEFAULT 0, dbid oid DEFAULT 0, queryid bigint DEFAULT 0, minmax_only boolean DEFAULT false"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_armor_headers",
+  //     "return_type": "SETOF record",
+  //     "arguments": "text, OUT key text, OUT value text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_key_id",
+  //     "return_type": "text",
+  //     "arguments": "bytea"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_pub_decrypt",
+  //     "return_type": "text",
+  //     "arguments": "bytea, bytea, text, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_pub_decrypt",
+  //     "return_type": "text",
+  //     "arguments": "bytea, bytea"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_pub_decrypt",
+  //     "return_type": "text",
+  //     "arguments": "bytea, bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_pub_decrypt_bytea",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, bytea, text, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_pub_decrypt_bytea",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_pub_decrypt_bytea",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, bytea"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_pub_encrypt",
+  //     "return_type": "bytea",
+  //     "arguments": "text, bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_pub_encrypt",
+  //     "return_type": "bytea",
+  //     "arguments": "text, bytea"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_pub_encrypt_bytea",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_pub_encrypt_bytea",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, bytea"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_sym_decrypt",
+  //     "return_type": "text",
+  //     "arguments": "bytea, text, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_sym_decrypt",
+  //     "return_type": "text",
+  //     "arguments": "bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_sym_decrypt_bytea",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_sym_decrypt_bytea",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, text, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_sym_encrypt",
+  //     "return_type": "bytea",
+  //     "arguments": "text, text, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_sym_encrypt",
+  //     "return_type": "bytea",
+  //     "arguments": "text, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_sym_encrypt_bytea",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, text, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgp_sym_encrypt_bytea",
+  //     "return_type": "bytea",
+  //     "arguments": "bytea, text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgrst_ddl_watch",
+  //     "return_type": "event_trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "pgrst_drop_watch",
+  //     "return_type": "event_trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "set_graphql_placeholder",
+  //     "return_type": "event_trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "uuid_generate_v1",
+  //     "return_type": "uuid",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "uuid_generate_v1mc",
+  //     "return_type": "uuid",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "uuid_generate_v3",
+  //     "return_type": "uuid",
+  //     "arguments": "namespace uuid, name text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "uuid_generate_v4",
+  //     "return_type": "uuid",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "uuid_generate_v5",
+  //     "return_type": "uuid",
+  //     "arguments": "namespace uuid, name text"
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "uuid_nil",
+  //     "return_type": "uuid",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "uuid_ns_dns",
+  //     "return_type": "uuid",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "uuid_ns_oid",
+  //     "return_type": "uuid",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "uuid_ns_url",
+  //     "return_type": "uuid",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "extensions",
+  //     "function_name": "uuid_ns_x500",
+  //     "return_type": "uuid",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "graphql",
+  //     "function_name": "_internal_resolve",
+  //     "return_type": "jsonb",
+  //     "arguments": "query text, variables jsonb DEFAULT '{}'::jsonb, \"operationName\" text DEFAULT NULL::text, extensions jsonb DEFAULT NULL::jsonb"
+  //   },
+  //   {
+  //     "schema": "graphql",
+  //     "function_name": "comment_directive",
+  //     "return_type": "jsonb",
+  //     "arguments": "comment_ text"
+  //   },
+  //   {
+  //     "schema": "graphql",
+  //     "function_name": "exception",
+  //     "return_type": "text",
+  //     "arguments": "message text"
+  //   },
+  //   {
+  //     "schema": "graphql",
+  //     "function_name": "get_schema_version",
+  //     "return_type": "integer",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "graphql",
+  //     "function_name": "increment_schema_version",
+  //     "return_type": "event_trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "graphql",
+  //     "function_name": "resolve",
+  //     "return_type": "jsonb",
+  //     "arguments": "query text, variables jsonb DEFAULT '{}'::jsonb, \"operationName\" text DEFAULT NULL::text, extensions jsonb DEFAULT NULL::jsonb"
+  //   },
+  //   {
+  //     "schema": "graphql_public",
+  //     "function_name": "graphql",
+  //     "return_type": "jsonb",
+  //     "arguments": "\"operationName\" text DEFAULT NULL::text, query text DEFAULT NULL::text, variables jsonb DEFAULT NULL::jsonb, extensions jsonb DEFAULT NULL::jsonb"
+  //   },
+  //   {
+  //     "schema": "pgbouncer",
+  //     "function_name": "get_auth",
+  //     "return_type": "TABLE(username text, password text)",
+  //     "arguments": "p_usename text"
+  //   },
+  //   {
+  //     "schema": "public",
+  //     "function_name": "get_matched_engineers",
+  //     "return_type": "TABLE(engineer_id uuid, full_name text, headline text, skills jsonb, match_score integer)",
+  //     "arguments": "project_uuid uuid"
+  //   },
+  //   {
+  //     "schema": "public",
+  //     "function_name": "get_user_profile",
+  //     "return_type": "TABLE(id uuid, email text, full_name text, role user_role, status profile_status, headline text, bio text, skills jsonb, portfolio_url text, resume_url text, company_name text)",
+  //     "arguments": "user_id uuid"
+  //   },
+  //   {
+  //     "schema": "public",
+  //     "function_name": "handle_new_user",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "public",
+  //     "function_name": "set_updated_at",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "public",
+  //     "function_name": "update_project_status_on_interview",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "public",
+  //     "function_name": "update_projects_search_tsv",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "apply_rls",
+  //     "return_type": "SETOF realtime.wal_rls",
+  //     "arguments": "wal jsonb, max_record_bytes integer DEFAULT (1024 * 1024)"
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "broadcast_changes",
+  //     "return_type": "void",
+  //     "arguments": "topic_name text, event_name text, operation text, table_name text, table_schema text, new record, old record, level text DEFAULT 'ROW'::text"
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "build_prepared_statement_sql",
+  //     "return_type": "text",
+  //     "arguments": "prepared_statement_name text, entity regclass, columns realtime.wal_column[]"
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "cast",
+  //     "return_type": "jsonb",
+  //     "arguments": "val text, type_ regtype"
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "check_equality_op",
+  //     "return_type": "boolean",
+  //     "arguments": "op realtime.equality_op, type_ regtype, val_1 text, val_2 text"
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "is_visible_through_filters",
+  //     "return_type": "boolean",
+  //     "arguments": "columns realtime.wal_column[], filters realtime.user_defined_filter[]"
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "list_changes",
+  //     "return_type": "SETOF realtime.wal_rls",
+  //     "arguments": "publication name, slot_name name, max_changes integer, max_record_bytes integer"
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "quote_wal2json",
+  //     "return_type": "text",
+  //     "arguments": "entity regclass"
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "send",
+  //     "return_type": "void",
+  //     "arguments": "payload jsonb, event text, topic text, private boolean DEFAULT true"
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "subscription_check_filters",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "to_regrole",
+  //     "return_type": "regrole",
+  //     "arguments": "role_name text"
+  //   },
+  //   {
+  //     "schema": "realtime",
+  //     "function_name": "topic",
+  //     "return_type": "text",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "add_prefixes",
+  //     "return_type": "void",
+  //     "arguments": "_bucket_id text, _name text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "can_insert_object",
+  //     "return_type": "void",
+  //     "arguments": "bucketid text, name text, owner uuid, metadata jsonb"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "delete_prefix",
+  //     "return_type": "boolean",
+  //     "arguments": "_bucket_id text, _name text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "delete_prefix_hierarchy_trigger",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "enforce_bucket_name_length",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "extension",
+  //     "return_type": "text",
+  //     "arguments": "name text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "filename",
+  //     "return_type": "text",
+  //     "arguments": "name text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "foldername",
+  //     "return_type": "text[]",
+  //     "arguments": "name text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "get_level",
+  //     "return_type": "integer",
+  //     "arguments": "name text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "get_prefix",
+  //     "return_type": "text",
+  //     "arguments": "name text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "get_prefixes",
+  //     "return_type": "text[]",
+  //     "arguments": "name text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "get_size_by_bucket",
+  //     "return_type": "TABLE(size bigint, bucket_id text)",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "list_multipart_uploads_with_delimiter",
+  //     "return_type": "TABLE(key text, id text, created_at timestamp with time zone)",
+  //     "arguments": "bucket_id text, prefix_param text, delimiter_param text, max_keys integer DEFAULT 100, next_key_token text DEFAULT ''::text, next_upload_token text DEFAULT ''::text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "list_objects_with_delimiter",
+  //     "return_type": "TABLE(name text, id uuid, metadata jsonb, updated_at timestamp with time zone)",
+  //     "arguments": "bucket_id text, prefix_param text, delimiter_param text, max_keys integer DEFAULT 100, start_after text DEFAULT ''::text, next_token text DEFAULT ''::text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "objects_insert_prefix_trigger",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "objects_update_prefix_trigger",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "operation",
+  //     "return_type": "text",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "prefixes_insert_trigger",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "search",
+  //     "return_type": "TABLE(name text, id uuid, updated_at timestamp with time zone, created_at timestamp with time zone, last_accessed_at timestamp with time zone, metadata jsonb)",
+  //     "arguments": "prefix text, bucketname text, limits integer DEFAULT 100, levels integer DEFAULT 1, offsets integer DEFAULT 0, search text DEFAULT ''::text, sortcolumn text DEFAULT 'name'::text, sortorder text DEFAULT 'asc'::text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "search_legacy_v1",
+  //     "return_type": "TABLE(name text, id uuid, updated_at timestamp with time zone, created_at timestamp with time zone, last_accessed_at timestamp with time zone, metadata jsonb)",
+  //     "arguments": "prefix text, bucketname text, limits integer DEFAULT 100, levels integer DEFAULT 1, offsets integer DEFAULT 0, search text DEFAULT ''::text, sortcolumn text DEFAULT 'name'::text, sortorder text DEFAULT 'asc'::text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "search_v1_optimised",
+  //     "return_type": "TABLE(name text, id uuid, updated_at timestamp with time zone, created_at timestamp with time zone, last_accessed_at timestamp with time zone, metadata jsonb)",
+  //     "arguments": "prefix text, bucketname text, limits integer DEFAULT 100, levels integer DEFAULT 1, offsets integer DEFAULT 0, search text DEFAULT ''::text, sortcolumn text DEFAULT 'name'::text, sortorder text DEFAULT 'asc'::text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "search_v2",
+  //     "return_type": "TABLE(key text, name text, id uuid, updated_at timestamp with time zone, created_at timestamp with time zone, metadata jsonb)",
+  //     "arguments": "prefix text, bucket_name text, limits integer DEFAULT 100, levels integer DEFAULT 1, start_after text DEFAULT ''::text"
+  //   },
+  //   {
+  //     "schema": "storage",
+  //     "function_name": "update_updated_at_column",
+  //     "return_type": "trigger",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "vault",
+  //     "function_name": "_crypto_aead_det_decrypt",
+  //     "return_type": "bytea",
+  //     "arguments": "message bytea, additional bytea, key_id bigint, context bytea DEFAULT '\\x7067736f6469756d'::bytea, nonce bytea DEFAULT NULL::bytea"
+  //   },
+  //   {
+  //     "schema": "vault",
+  //     "function_name": "_crypto_aead_det_encrypt",
+  //     "return_type": "bytea",
+  //     "arguments": "message bytea, additional bytea, key_id bigint, context bytea DEFAULT '\\x7067736f6469756d'::bytea, nonce bytea DEFAULT NULL::bytea"
+  //   },
+  //   {
+  //     "schema": "vault",
+  //     "function_name": "_crypto_aead_det_noncegen",
+  //     "return_type": "bytea",
+  //     "arguments": ""
+  //   },
+  //   {
+  //     "schema": "vault",
+  //     "function_name": "create_secret",
+  //     "return_type": "uuid",
+  //     "arguments": "new_secret text, new_name text DEFAULT NULL::text, new_description text DEFAULT ''::text, new_key_id uuid DEFAULT NULL::uuid"
+  //   },
+  //   {
+  //     "schema": "vault",
+  //     "function_name": "update_secret",
+  //     "return_type": "void",
+  //     "arguments": "secret_id uuid, new_secret text DEFAULT NULL::text, new_name text DEFAULT NULL::text, new_description text DEFAULT NULL::text, new_key_id uuid DEFAULT NULL::uuid"
+  //   }
+  // ]
+
+
+
+
+  // all trigers 
+
+  // [
+  //   {
+  //     "table_name": "buckets",
+  //     "trigger_name": "enforce_bucket_name_length_trigger",
+  //     "activation": "BEFORE",
+  //     "event": "UPDATE",
+  //     "definition": "EXECUTE FUNCTION storage.enforce_bucket_name_length()"
+  //   },
+  //   {
+  //     "table_name": "buckets",
+  //     "trigger_name": "enforce_bucket_name_length_trigger",
+  //     "activation": "BEFORE",
+  //     "event": "INSERT",
+  //     "definition": "EXECUTE FUNCTION storage.enforce_bucket_name_length()"
+  //   },
+  //   {
+  //     "table_name": "interviews",
+  //     "trigger_name": "trigger_update_project_status",
+  //     "activation": "AFTER",
+  //     "event": "INSERT",
+  //     "definition": "EXECUTE FUNCTION update_project_status_on_interview()"
+  //   },
+  //   {
+  //     "table_name": "interviews",
+  //     "trigger_name": "trigger_update_project_status",
+  //     "activation": "AFTER",
+  //     "event": "UPDATE",
+  //     "definition": "EXECUTE FUNCTION update_project_status_on_interview()"
+  //   },
+  //   {
+  //     "table_name": "objects",
+  //     "trigger_name": "objects_delete_delete_prefix",
+  //     "activation": "AFTER",
+  //     "event": "DELETE",
+  //     "definition": "EXECUTE FUNCTION storage.delete_prefix_hierarchy_trigger()"
+  //   },
+  //   {
+  //     "table_name": "objects",
+  //     "trigger_name": "objects_insert_create_prefix",
+  //     "activation": "BEFORE",
+  //     "event": "INSERT",
+  //     "definition": "EXECUTE FUNCTION storage.objects_insert_prefix_trigger()"
+  //   },
+  //   {
+  //     "table_name": "objects",
+  //     "trigger_name": "objects_update_create_prefix",
+  //     "activation": "BEFORE",
+  //     "event": "UPDATE",
+  //     "definition": "EXECUTE FUNCTION storage.objects_update_prefix_trigger()"
+  //   },
+  //   {
+  //     "table_name": "objects",
+  //     "trigger_name": "update_objects_updated_at",
+  //     "activation": "BEFORE",
+  //     "event": "UPDATE",
+  //     "definition": "EXECUTE FUNCTION storage.update_updated_at_column()"
+  //   },
+  //   {
+  //     "table_name": "prefixes",
+  //     "trigger_name": "prefixes_create_hierarchy",
+  //     "activation": "BEFORE",
+  //     "event": "INSERT",
+  //     "definition": "EXECUTE FUNCTION storage.prefixes_insert_trigger()"
+  //   },
+  //   {
+  //     "table_name": "prefixes",
+  //     "trigger_name": "prefixes_delete_hierarchy",
+  //     "activation": "AFTER",
+  //     "event": "DELETE",
+  //     "definition": "EXECUTE FUNCTION storage.delete_prefix_hierarchy_trigger()"
+  //   },
+  //   {
+  //     "table_name": "profiles",
+  //     "trigger_name": "trg_profiles_set_updated_at",
+  //     "activation": "BEFORE",
+  //     "event": "UPDATE",
+  //     "definition": "EXECUTE FUNCTION set_updated_at()"
+  //   },
+  //   {
+  //     "table_name": "projects",
+  //     "trigger_name": "trg_projects_search_tsv",
+  //     "activation": "BEFORE",
+  //     "event": "INSERT",
+  //     "definition": "EXECUTE FUNCTION update_projects_search_tsv()"
+  //   },
+  //   {
+  //     "table_name": "projects",
+  //     "trigger_name": "trg_projects_search_tsv",
+  //     "activation": "BEFORE",
+  //     "event": "UPDATE",
+  //     "definition": "EXECUTE FUNCTION update_projects_search_tsv()"
+  //   },
+  //   {
+  //     "table_name": "subscription",
+  //     "trigger_name": "tr_check_filters",
+  //     "activation": "BEFORE",
+  //     "event": "UPDATE",
+  //     "definition": "EXECUTE FUNCTION realtime.subscription_check_filters()"
+  //   },
+  //   {
+  //     "table_name": "subscription",
+  //     "trigger_name": "tr_check_filters",
+  //     "activation": "BEFORE",
+  //     "event": "INSERT",
+  //     "definition": "EXECUTE FUNCTION realtime.subscription_check_filters()"
+  //   },
+  //   {
+  //     "table_name": "users",
+  //     "trigger_name": "on_auth_user_created",
+  //     "activation": "AFTER",
+  //     "event": "INSERT",
+  //     "definition": "EXECUTE FUNCTION handle_new_user()"
+  //   }
+  // ]
+
+
+
+
+  // all rules 
+
+
+  // [
+  //   {
+  //     "schemaname": "pg_catalog",
+  //     "tablename": "pg_settings",
+  //     "rulename": "pg_settings_n",
+  //     "definition": "CREATE RULE pg_settings_n AS\n    ON UPDATE TO pg_catalog.pg_settings DO INSTEAD NOTHING;"
+  //   },
+  //   {
+  //     "schemaname": "pg_catalog",
+  //     "tablename": "pg_settings",
+  //     "rulename": "pg_settings_u",
+  //     "definition": "CREATE RULE pg_settings_u AS\n    ON UPDATE TO pg_catalog.pg_settings\n   WHERE (new.name = old.name) DO  SELECT set_config(old.name, new.setting, false) AS set_config;"
+  //   }
+  // ]
+
+  // all polices 
+
+
+  // SELECT polname AS policy_name,
+  //       schemaname,
+  //       tablename,
+  //       polcmd AS command,
+  //       polqual AS using_expression,
+  //       polwithcheck AS with_check
+  // FROM pg_policies
+  // ORDER BY schemaname, tablename, policy_name;
+
+
+  // All Extensions
+
+
+  // [
+  //   {
+  //     "oid": 13568,
+  //     "extname": "plpgsql",
+  //     "extowner": 10,
+  //     "extnamespace": 11,
+  //     "extrelocatable": false,
+  //     "extversion": "1.0",
+  //     "extconfig": null,
+  //     "extcondition": null
+  //   },
+  //   {
+  //     "oid": 16389,
+  //     "extname": "pg_stat_statements",
+  //     "extowner": 16384,
+  //     "extnamespace": 16388,
+  //     "extrelocatable": true,
+  //     "extversion": "1.11",
+  //     "extconfig": null,
+  //     "extcondition": null
+  //   },
+  //   {
+  //     "oid": 16432,
+  //     "extname": "uuid-ossp",
+  //     "extowner": 16384,
+  //     "extnamespace": 16388,
+  //     "extrelocatable": true,
+  //     "extversion": "1.1",
+  //     "extconfig": null,
+  //     "extcondition": null
+  //   },
+  //   {
+  //     "oid": 16443,
+  //     "extname": "pgcrypto",
+  //     "extowner": 16384,
+  //     "extnamespace": 16388,
+  //     "extrelocatable": true,
+  //     "extversion": "1.3",
+  //     "extconfig": null,
+  //     "extcondition": null
+  //   },
+  //   {
+  //     "oid": 16654,
+  //     "extname": "supabase_vault",
+  //     "extowner": 10,
+  //     "extnamespace": 16653,
+  //     "extrelocatable": false,
+  //     "extversion": "0.3.1",
+  //     "extconfig": [
+  //       16658
+  //     ],
+  //     "extcondition": [
+  //       ""
+  //     ]
+  //   },
+  //   {
+  //     "oid": 16689,
+  //     "extname": "pg_graphql",
+  //     "extowner": 10,
+  //     "extnamespace": 16624,
+  //     "extrelocatable": false,
+  //     "extversion": "1.5.11",
+  //     "extconfig": null,
+  //     "extcondition": null
+  //   }
+  // ]

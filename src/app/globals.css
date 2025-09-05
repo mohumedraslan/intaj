@@ -3,45 +3,65 @@
 
 @layer base {
   :root {
-    /* Light Theme (Placeholder) */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Professional 3-Color Theme - Light Mode */
+    /* Primary: Royal Blue */
+    --primary: 225 73% 57%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary: Teal */
+    --secondary: 180 100% 35%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Accent: Amber */
+    --accent: 45 100% 50%;
+    --accent-foreground: 0 0% 10%;
+    
+    /* Supporting Colors */
+    --background: 220 33% 98%;
+    --foreground: 222 47% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 214 100% 59%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 222 47% 11%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 214 100% 59%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 225 73% 57%;
     --radius: 0.5rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   }
 
   .dark {
-    /* High-Contrast Dark Theme */
+    /* Professional 3-Color Theme - Dark Mode */
+    /* Primary: Royal Blue (darker) */
+    --primary: 225 73% 47%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary: Teal (darker) */
+    --secondary: 180 100% 25%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Accent: Amber (darker) */
+    --accent: 45 100% 45%;
+    --accent-foreground: 0 0% 10%;
+    
+    /* Supporting Colors */
     --background: 220 13% 8%;
     --foreground: 210 40% 98%;
     --card: 220 13% 11%;
     --card-foreground: 210 40% 98%;
     --popover: 220 13% 11%;
     --popover-foreground: 210 40% 98%;
-    --primary: 214 100% 59%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 210 40% 98%;
     --muted: 220 13% 15%;
     --muted-foreground: 220 13% 60%;
-    --accent: 195 100% 50%;
-    --accent-foreground: 220 13% 8%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 220 13% 20%;
@@ -75,8 +95,8 @@
 }
 
 body {
-  background: #fff;
-  color: #222;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   padding: 0;
   margin: 0;

@@ -1,0 +1,192 @@
+// src/app/(dashboard)/dashboard/page.tsx.bak
+import { Suspense } from 'react';
+import { getSession } from '@/app/auth/actions';
+import { redirect } from 'next/navigation';
+import { createClient } from '@/lib/supabase/server';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import {
+  PlusCircle,
+  MessageSquare,
+  Settings,
+  BarChart,
+  Users,
+  HelpCircle
+} from 'lucide-react';
+import { DashboardSkeleton } from '@/components/dashboard/DashboardSkeleton';
+import { StatsCard } from '@/components/dashboard/StatsCard';
+import { AnalyticsChart } from '@/components/dashboard/AnalyticsChart';
+
+async function DashboardContent() {
+  const { user } = await getSession();
+  if (!user) {
+    redirect('/login');
+  }
+
+  const supabase = await createClient();
+  
+  // Get chatbots
+  const { data: chatbots, error: chatbotsError } = await supabase
+    .from('chatbots')
+    .select('*')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false });
+
+  // Analytics data
+  const analyticsData = {
+    conversations: {
+      data: [120, 132, 101, 134, 90, 230, 210, 180, 160, 150, 140, 130],
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    },
+    messages: {
+      total: chatbots?.reduce((acc, bot) => acc + (bot.message_count || 0), 0) || 0,
+      trend: { value: 12.5, isPositive: true },
+    },
+    activeUsers: {
+      total: 1234,
+      trend: { value: 8.2, isPositive: true },
+    },
+    responseRate: {
+      value: 98.5,
+      trend: { value: 2.1, isPositive: true },
+    }
+  };
+
+  return (
+    <div className="space-y-8">
+      {/* Stats Section */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <StatsCard
+          title="Total Messages"
+          value={analyticsData.messages.total}
+          trend={analyticsData.messages.trend}
+          icon={<MessageSquare className="h-6 w-6 text-primary" />}
+        />
+        <StatsCard
+          title="Active Users"
+          value={analyticsData.activeUsers.total}
+          trend={analyticsData.activeUsers.trend}
+          icon={<Users className="h-6 w-6 text-primary" />}
+        />
+        <StatsCard
+          title="Response Rate"
+          value={`${analyticsData.responseRate.value}%`}
+          trend={analyticsData.responseRate.trend}
+          icon={<BarChart className="h-6 w-6 text-primary" />}
+        />
+        <StatsCard
+          title="Active Agents"
+          value={chatbots?.length ?? 0}
+          description="Total active AI agents"
+          icon={<Settings className="h-6 w-6 text-primary" />}
+        />
+      </div>
+
+      {/* Analytics Chart */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Conversations Overview</CardTitle>
+        </CardHeader>
+        <CardContent className="pt-4">
+          <AnalyticsChart
+            data={analyticsData.conversations.data}
+            labels={analyticsData.conversations.labels}
+          />
+        </CardContent>
+      </Card>
+
+      {/* AI Agents Overview */}
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* Active Agents */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Active Agents</CardTitle>
+            <CardDescription>Your currently active AI assistants</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {chatbots && chatbots.length > 0 ? (
+                chatbots.slice(0, 5).map((bot) => (
+                  <div key={bot.id} className="flex items-center justify-between p-4 rounded-lg border">
+                    <div className="flex items-center gap-4">
+                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                        <MessageSquare className="h-5 w-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-medium">{bot.name}</p>
+                        <p className="text-sm text-muted-foreground">
+                          Created on: {new Date(bot.created_at).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                    <Link href={`/agents/${bot.id}`}>
+                      <Button variant="ghost" size="sm">
+                        View Details
+                      </Button>
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-6">
+                  <p className="text-muted-foreground">No agents created yet</p>
+                  <Link href="/agents/create">
+                    <Button className="mt-4">Create Your First Agent</Button>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Quick Actions */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+            <CardDescription>Common tasks and actions</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <Link href="/agents/create">
+                <Button className="w-full justify-start" variant="outline">
+                  <PlusCircle className="mr-2 h-4 w-4" />
+                  Create New Agent
+                </Button>
+              </Link>
+              <Link href="/agents/templates">
+                <Button className="w-full justify-start" variant="outline">
+                  <MessageSquare className="mr-2 h-4 w-4" />
+                  Browse Templates
+                </Button>
+              </Link>
+              <Link href="/analytics">
+                <Button className="w-full justify-start" variant="outline">
+                  <BarChart className="mr-2 h-4 w-4" />
+                  View Analytics
+                </Button>
+              </Link>
+              <Link href="/help">
+                <Button className="w-full justify-start" variant="outline">
+                  <HelpCircle className="mr-2 h-4 w-4" />
+                  Get Help
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {chatbotsError && (
+        <p className="text-sm text-destructive">Error loading agents: {chatbotsError.message}</p>
+      )}
+    </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<DashboardSkeleton />}>
+      <DashboardContent />
+    </Suspense>
+  );
+}

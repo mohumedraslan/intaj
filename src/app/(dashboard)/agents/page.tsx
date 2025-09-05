@@ -32,10 +32,10 @@ async function AgentsList() {
     .order('created_at', { ascending: false });
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
         <div>
-          <h1 className="text-3xl font-bold">My Agents</h1>
+          <h1 className="text-3xl font-bold mb-1">My Agents</h1>
           <p className="text-muted-foreground">Your collection of AI assistants, organized by category.</p>
         </div>
         <Link href="/agents/create">
@@ -47,15 +47,15 @@ async function AgentsList() {
       </div>
 
       {agents && agents.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {agents.map((agent: { id: string, name: string, category: string, created_at: string }) => (
             <Card key={agent.id} className="flex flex-col">
               <CardHeader>
                 <div className="flex justify-between items-start">
-                    <CardTitle className="text-lg">{agent.name}</CardTitle>
-                    <Badge className={cn(categoryColors[agent.category] || categoryColors.Default)}>
-                        {agent.category || 'General'}
-                    </Badge>
+                  <CardTitle className="text-lg">{agent.name}</CardTitle>
+                  <Badge className={cn(categoryColors[agent.category] || categoryColors.Default)}>
+                    {agent.category || 'General'}
+                  </Badge>
                 </div>
                 <CardDescription>
                   Created on: {new Date(agent.created_at).toLocaleDateString()}
@@ -63,18 +63,18 @@ async function AgentsList() {
               </CardHeader>
               <CardContent className="flex-grow flex flex-col justify-end">
                 <div className="flex flex-wrap gap-2">
-                   <Link href={`/agents/${agent.id}/chat`} className="flex-1">
-                      <Button variant="secondary" size="sm" className="w-full">
-                        <MessageSquare className="mr-2 h-4 w-4" />
-                        Chat
-                      </Button>
-                    </Link>
-                    <Link href={`/agents/${agent.id}/manage`} className="flex-1">
-                      <Button variant="outline" size="sm" className="w-full">
-                        <Settings className="mr-2 h-4 w-4" />
-                        Manage
-                      </Button>
-                    </Link>
+                  <Link href={`/agents/${agent.id}/chat`} className="flex-1">
+                    <Button variant="secondary" size="sm" className="w-full">
+                      <MessageSquare className="mr-2 h-4 w-4" />
+                      Chat
+                    </Button>
+                  </Link>
+                  <Link href={`/agents/${agent.id}/manage`} className="flex-1">
+                    <Button variant="outline" size="sm" className="w-full">
+                      <Settings className="mr-2 h-4 w-4" />
+                      Manage
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
@@ -107,10 +107,8 @@ async function AgentsList() {
 
 export default function AgentsPage() {
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
-      <Suspense fallback={<DashboardSkeleton />}>
-        <AgentsList />
-      </Suspense>
-    </div>
+    <Suspense fallback={<DashboardSkeleton />}>
+      <AgentsList />
+    </Suspense>
   );
 }

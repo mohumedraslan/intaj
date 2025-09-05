@@ -1,0 +1,402 @@
+/* Dashboard styles based on Professional 3-Color Theme */
+
+/* Main Dashboard Container */
+.dashboard-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: hsl(var(--background));
+  border-radius: 24px;
+  display: flex; /* Add flex display to align sidebar and content */
+}
+
+/* Sidebar */
+.dashboard-sidebar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px;
+  gap: 12px;
+  isolation: isolate;
+  width: 212px;
+  height: 100vh;
+  position: fixed; /* Fix sidebar position */
+  top: 0;
+  left: 0;
+  border-right: 1px solid hsl(var(--border));
+  background: linear-gradient(to bottom, hsl(var(--card)), hsl(var(--background)));
+  box-shadow: var(--shadow-md);
+  z-index: 10; /* Ensure sidebar appears above content */
+}
+
+/* Sidebar Logo Container */
+.sidebar-logo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  padding: 8px;
+  gap: 8px;
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+}
+
+/* Logo Icon */
+.logo-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+}
+
+/* Logo Text */
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: hsl(var(--foreground));
+}
+
+/* Sidebar Navigation Group */
+.sidebar-nav-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 0px 12px;
+  gap: 4px;
+  width: 100%;
+}
+
+/* Sidebar Section Title */
+.sidebar-section-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4px 12px;
+  width: 100%;
+  height: 28px;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Sidebar Navigation Item */
+.sidebar-nav-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  padding: 10px 12px;
+  gap: 8px;
+  width: 100%;
+  height: 40px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+}
+
+/* Active Navigation Item */
+.sidebar-nav-item.active {
+  background: hsl(var(--primary) / 0.1);
+  box-shadow: var(--shadow-sm);
+  font-weight: 500;
+  border-left: 2px solid hsl(var(--primary));
+}
+
+.sidebar-nav-item:hover {
+  background: hsl(var(--accent) / 0.1);
+  transform: translateX(2px);
+}
+
+/* Navigation Item Icon */
+.nav-item-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  width: 20px;
+  height: 20px;
+  border-radius: 8px;
+}
+
+/* Navigation Item Text */
+.nav-item-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  color: hsl(var(--foreground));
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin-left: 8px;
+}
+
+/* Main Content Area */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin-left: 212px; /* Match sidebar width */
+  width: calc(100% - 212px);
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, hsl(var(--background)), hsl(var(--card)));
+  flex: 1; /* Take remaining space */
+}
+
+/* Dashboard Container Inner */
+.dashboard-container-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+  margin-bottom: 32px;
+}
+
+/* Dashboard Title */
+.dashboard-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: hsl(var(--foreground));
+}
+
+/* Dashboard Description */
+.dashboard-description {
+  font-size: 16px;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 24px;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+  background: hsl(var(--card));
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+  margin-bottom: 28px;
+  transition: all 0.3s ease;
+  border: 1px solid hsl(var(--border));
+}
+
+.dashboard-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: hsl(var(--primary) / 0.2);
+}
+
+/* Dashboard Card Header */
+.dashboard-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+/* Dashboard Card Title */
+.dashboard-card-title {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: hsl(var(--foreground));
+}
+
+/* Dashboard Card Content */
+.dashboard-card-content {
+  width: 100%;
+}
+
+/* Dashboard Card Content Items */
+.dashboard-card-content .space-y-3,
+.dashboard-card-content .space-y-4 {
+  margin-top: 8px;
+}
+
+/* Dashboard Card Content Item */
+.dashboard-card-content .flex.items-center {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.dashboard-card-content .flex.items-center:hover {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+/* Dashboard Card Content Item Icon Container */
+.dashboard-card-content .h-9.w-9.rounded-full,
+.dashboard-card-content .h-10.w-10.rounded-full {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-right: 16px;
+}
+
+/* Dashboard Card Grid */
+.dashboard-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 28px;
+  margin-bottom: 36px;
+}
+
+/* Dashboard Card Grid for 2-column layout */
+.dashboard-card-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 28px;
+  margin-bottom: 36px;
+}
+
+/* Dashboard Analytics Card */
+.dashboard-analytics-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-analytics-card:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+}
+
+/* Dashboard Footer */
+.dashboard-footer {
+  margin-top: auto;
+  width: 100%;
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  padding: 1rem 0;
+  border-top: 1px solid hsl(var(--border));
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard-footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.dashboard-footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.dashboard-footer-copyright {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.dashboard-footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.dashboard-footer-link {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dashboard-footer-link:hover {
+  color: hsl(var(--foreground));
+  text-decoration: underline;
+}
+
+.dashboard-footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.dashboard-footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: hsl(var(--muted) / 0.7);
+  color: hsl(var(--muted-foreground));
+  transition: all 0.2s ease;
+}
+
+.dashboard-footer-social-link:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .dashboard-sidebar {
+    width: 64px;
+  }
+  
+  .logo-text, .nav-item-text, .sidebar-section-title {
+    display: none;
+  }
+  
+  .dashboard-content {
+    margin-left: 64px;
+    width: calc(100% - 64px);
+  }
+  
+  .dashboard-footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    display: none;
+  }
+  
+  .dashboard-content {
+    margin-left: 0;
+    width: 100%;
+  }
+}

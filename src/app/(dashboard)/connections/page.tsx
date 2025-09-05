@@ -12,6 +12,11 @@ export default async function ConnectionsPage({
 }: {
   searchParams: { success?: string; error?: string };
 }) {
+  // Convert searchParams to a regular object to avoid the error
+  const params = {
+    success: searchParams.success,
+    error: searchParams.error
+  };
   const { user } = await getSession();
   if (!user) redirect('/login');
 
@@ -25,7 +30,7 @@ export default async function ConnectionsPage({
   return (
     <div className="max-w-6xl mx-auto space-y-6 p-6">
       {/* Success/Error Messages */}
-             {searchParams.success && (
+             {params.success && (
          <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
            <div className="flex">
              <div className="flex-shrink-0">
@@ -42,7 +47,7 @@ export default async function ConnectionsPage({
          </div>
        )}
       
-             {searchParams.error && (
+             {params.error && (
          <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
            <div className="flex">
              <div className="flex-shrink-0">

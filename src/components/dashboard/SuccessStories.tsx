@@ -29,33 +29,33 @@ export function SuccessStories() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {stories.map((story, index) => (
-            <div key={index} className="p-4 border rounded-lg bg-white shadow-sm">
-              <div className="flex items-start gap-3">
+            <div
+              key={index}
+              className="flex flex-col justify-between p-6 rounded-xl bg-white shadow-md border border-gray-100"
+            >
+              <div className="flex items-start gap-3 mb-2">
                 <div className="p-2 bg-blue-50 rounded-lg">
                   <story.icon className="h-4 w-4 text-primary" />
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-semibold text-foreground">{story.company}</h4>
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
-                      {story.industry}
-                    </span>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-2">
+                  <h4 className="font-bold text-lg text-foreground mb-1">{story.company}</h4>
+                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded mb-2 inline-block">
+                    {story.industry}
+                  </span>
+                  <p className="text-sm text-muted-foreground mb-3">
                     {story.description}
                   </p>
-                  <div className="text-sm font-medium text-primary">
-                    {story.result}
-                  </div>
                 </div>
+              </div>
+              <div className="text-base font-extrabold text-blue-600 mt-2">
+                {story.result}
               </div>
             </div>
           ))}
         </div>
-        
-  <div className="mt-4 p-3 bg-blue-50 rounded-lg text-center">
+        <div className="mt-6 p-3 bg-blue-50 rounded-lg text-center">
           <p className="text-sm text-primary font-medium">
             Ready to create your own success story?
           </p>
