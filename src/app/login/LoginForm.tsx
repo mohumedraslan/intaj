@@ -4,9 +4,8 @@ import { useTransition, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { login } from '@/app/auth/actions';
+import { login, getSession } from '@/app/auth/actions';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
 import { Checkbox } from '@/components/ui/checkbox';
 
@@ -16,8 +15,7 @@ export default function LoginForm() {
 
   useEffect(() => {
     const checkSession = async () => {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const { user } = await getSession();
       if (user) {
         router.replace('/dashboard');
       }

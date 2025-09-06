@@ -1,6 +1,6 @@
 // src/app/(dashboard)/dashboard/page.tsx
 import { Suspense } from 'react';
-import { getSession } from '@/app/auth/actions';
+import { checkSession } from '@/app/auth/actions';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
@@ -19,7 +19,7 @@ import { StatsCard } from '@/components/dashboard/StatsCard';
 import { DashboardChart } from '@/components/dashboard/DashboardChart';
 
 async function DashboardContent() {
-  const session = await getSession();
+  const session = await checkSession();
   if (!session?.user) {
     redirect('/login');
   }
